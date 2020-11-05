@@ -1,0 +1,13 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  width: 30%;
+  margin: 20px;
+  padding: 20px;
+  border: black 1px solid;
+}
