@@ -1,6 +1,33 @@
 <div class="flex-container">
-  <div class="item">Flex Box One</div>
-  <div class="item">Flex Box Two</div>
-  <div class="item">Flex Box Two</div>
-  <div class="item">Flex Box Two</div>
+  <div class="item">
+    <mat-card>
+      <h1>VG</h1>
+      <mat-divider></mat-divider>
+      <br />
+      <h2>Stock On Hand:</h2>
+      <h2>{{vgStock}} Litres</h2>
+      <mat-divider></mat-divider><br />
+      <h2>Cost Per Litre</h2>
+      <h2>${{vgCost}}</h2>
+      <h2></h2>
+      <button mat-raised-button color="primary">Update Stock</button>
+      <button mat-raised-button color="primary">Update Cost</button>
+    </mat-card>
+  </div>
+  <div class="item">
+    <mat-card>
+      <h1>PG</h1>
+      <mat-divider></mat-divider>
+      <br />
+      <h2>Stock On Hand:</h2>
+      <h2>{{pgStock}} Litres</h2>
+      <mat-divider></mat-divider><br />
+      <h2>Cost Per Litre</h2>
+      <h2>${{pgCost}}</h2>
+      <h2></h2>
+      <button mat-raised-button color="primary">Update Stock</button>
+      <button mat-raised-button color="primary">Update Cost</button>
+    </mat-card>
+  </div>
+
 </div>

@@ -3,11 +3,23 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 
 .item {
   width: 30%;
   margin: 20px;
-  padding: 20px;
-  border: black 1px solid;
+}
+
+h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-card {
+  text-align: center;
+}
+
+.mat-raised-button {
+  margin: 10px;
 }
