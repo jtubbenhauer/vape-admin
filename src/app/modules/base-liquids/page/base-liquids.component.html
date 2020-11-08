@@ -10,8 +10,8 @@
       <h2>Cost Per Litre</h2>
       <h2>${{vgCost}}</h2>
       <h2></h2>
-      <button mat-raised-button color="primary">Update Stock</button>
-      <button mat-raised-button color="primary">Update Cost</button>
+      <button mat-raised-button color="primary" (click)="openVgStockDialog()">Add VG Stock</button>
+      <button mat-raised-button color="primary" (click)="openVgCostDialog()">Update Cost</button>
     </mat-card>
   </div>
   <div class="item">
@@ -25,8 +25,8 @@
       <h2>Cost Per Litre</h2>
       <h2>${{pgCost}}</h2>
       <h2></h2>
-      <button mat-raised-button color="primary">Update Stock</button>
-      <button mat-raised-button color="primary">Update Cost</button>
+      <button mat-raised-button color="primary" (click)="openPgStockDialog()">Add PG Stock</button>
+      <button mat-raised-button color="primary" (click)="openPgCostDialog()">Update Cost</button>
     </mat-card>
   </div>
 

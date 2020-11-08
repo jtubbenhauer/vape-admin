@@ -20,6 +20,11 @@ const routes: Routes = [{
       path: 'base-liquids',
       loadChildren: () =>
         import('@modules/base-liquids/base-liquids.module').then(m => m.BaseLiquidsModule)
+    },
+    {
+      path: 'flavours',
+      loadChildren: () =>
+        import('@modules/flavours/flavours.module').then(m => m.FlavoursModule)
     }
   ]
 }]

@@ -3,26 +3,24 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export interface DialogData {
   base: string;
-  stock: number;
+  cost: number;
 }
 
-
 @Component({
-  selector: 'app-vg-stock-dialog',
-  templateUrl: './vg-stock-dialog.component.html',
-  styleUrls: ['./vg-stock-dialog.component.css']
+  selector: 'app-pg-cost-dialog',
+  templateUrl: './pg-cost-dialog.component.html',
+  styleUrls: ['./pg-cost-dialog.component.css']
 })
-export class VgStockDialogComponent implements OnInit {
+export class PgCostDialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<VgStockDialogComponent>,
+    public dialogRef: MatDialogRef<PgCostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 
   ngOnInit(): void {
   }
