@@ -11,7 +11,7 @@ export class FlavoursComponent implements OnInit {
   constructor(private service: FlavoursService) { }
 
   ngOnInit(): void {
-    this.service.getFlavours();
+    this.service.getSuppliers();
     
   }
 
