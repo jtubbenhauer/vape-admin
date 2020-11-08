@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireModule } from "@angular/fire";
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +9,19 @@ export class FlavoursService {
   constructor(private afs: AngularFirestore) { }
 
   getSuppliers() {
-    this.afs.collection('suppliers').valueChanges().subscribe(res => {
-      console.log(res);
+    return this.afs.collection('suppliers').valueChanges();
+  }
+
+  getFlavours() {
+    return this.afs.collection('flavours').valueChanges();
+  }
+
+  addFlavour(data) {
+    return this.afs.collection('flavours').add({
+      'supplier': data.supplier,
+      'name': data.name,
+      'cost': data.cost,
+      'stock': data.stock,
     })
   }
 

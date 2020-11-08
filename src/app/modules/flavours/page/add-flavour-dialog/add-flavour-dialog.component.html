@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Add Flavour</h1>
+<div mat-dialog-content>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Supplier</mat-label>
+    <mat-select [(ngModel)]="data.supplier">
+      <mat-option *ngFor="let item of data.supplierList" [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Flavour Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Cost (Litre)</mat-label>
+    <input matInput [(ngModel)]="data.cost">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Stock On Hand (Litre)</mat-label>
+    <input matInput [(ngModel)]="data.stock">
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  </div>
+
+</div>
