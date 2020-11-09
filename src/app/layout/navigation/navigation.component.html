@@ -3,9 +3,9 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>Vape Admin</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="/dashboard">Dashboard</a>
+      <a mat-list-item href="/dashboard"><i class="las la-chart-pie"></i>Dashboard</a>
       <mat-divider></mat-divider>
       <a mat-list-item href="/suppliers"><i class="las la-store"></i> Suppliers</a>
       <a mat-list-item href="/base-liquids"><i class="las la-flask"></i>Base Liquids</a>

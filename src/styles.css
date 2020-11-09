@@ -2,3 +2,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-drawer {
+  background-color: #ebebeb;
+}
+
+.mat-toolbar {
+  background-color: rgb(63, 63, 63);
+}
+
+.mat-toolbar.mat-primary {
+  background: #424242;
+  color: #fff;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: #f0570b;
+}
