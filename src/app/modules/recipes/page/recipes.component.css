@@ -1,0 +1,18 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-container .table {
+  width: 800px;
+} 
+
+.flex-container .button {
+  align-self: auto;
+}
+
+.flex-container div {
+  margin-top: 20px;
+}

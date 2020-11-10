@@ -3,23 +3,21 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  
 }
 
-.flex-item {
-  padding: 15px;
-  width: 40%;
+.flex-container div {
+
   margin-bottom: 25px;
 }
 
-.mat-form-field {
-  padding: 10px;
+.flex-container .recipe-info {
+  align-self: center;
 }
 
-.detail-form {
-  display:flex;
-  justify-content: center;
-  margin: auto;
+.flex-container .ingredients-list {
+  width: 700px;
 }
 
+.flex-container .header {
+  padding: 20px 0px 0px 0px;
+}

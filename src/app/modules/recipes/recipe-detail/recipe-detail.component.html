@@ -1,15 +1,13 @@
 <div class="flex-container">
-  <div><h1>Recipe Details - Use ID Here</h1></div>
-  <div class="mat-elevation-z2 flex-item detail-section">
-    <form class="detail-form">
-      <mat-form-field>
-        <mat-label>Recipe name</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Collection</mat-label>
-        <input matInput>
-      </mat-form-field>
-    </form>
+  <div class="header">
+    <h1>{{title}} Recipe</h1>
+  </div>
+  <div class="recipe-info">
+    <app-recipe-info
+    [title]="title"
+    [collection]="collection"></app-recipe-info>
+  </div>
+  <div class="ingredients-list">
+    <app-recipe-ingredients-list [id]="id"></app-recipe-ingredients-list>
   </div>
 </div>

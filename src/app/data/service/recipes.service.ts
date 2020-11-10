@@ -20,5 +20,13 @@ export class RecipesService {
     ))
   }
 
+  getRecipe(id) {
+    return this.afs.collection('recipes').doc(id).get();
+  }
+
+  getIngredients(id) {
+    return this.afs.collection('recipes').doc(id).collection('flavours').valueChanges();
+  }
+
 }
 

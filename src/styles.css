@@ -19,3 +19,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-raised-button.mat-primary {
   background-color: #f0570b;
 }
+
+.mat-body, .mat-body-1, .mat-typography {
+  font: 400 16px/22px Roboto, "Helvetica Neue", sans-serif !important;
+  letter-spacing: normal;
+}
+
+.mat-cell, .mat-footer-cell {
+  font-size: 15px;
+}
+.mat-header-cell {
+  font-size: 14px;
+  font-weight: 500;
+}
