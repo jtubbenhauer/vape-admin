@@ -16,6 +16,10 @@ export class FlavoursService {
     return this.afs.collection('flavours').valueChanges();
   }
 
+  getFlavourOptions() {
+    return this.afs.collection('flavours').snapshotChanges();
+  }
+
   addFlavour(data) {
     return this.afs.collection('flavours').add({
       'supplier': data.supplier,

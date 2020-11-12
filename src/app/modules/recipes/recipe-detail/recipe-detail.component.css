@@ -6,18 +6,17 @@
 }
 
 .flex-container div {
-
+  width: 700px;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 0;
   margin-bottom: 25px;
 }
 
-.flex-container .recipe-info {
-  align-self: center;
-}
-
-.flex-container .ingredients-list {
-  width: 700px;
-}
-
+/* .flex-container .recipe-info {
+  margin: auto;
+} */
+/* 
 .flex-container .header {
   padding: 20px 0px 0px 0px;
-}
+} */

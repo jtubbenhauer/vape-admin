@@ -5,14 +5,8 @@
   align-items: center;
 }
 
-.flex-container .table {
-  width: 800px;
-} 
-
-.flex-container .button {
-  align-self: auto;
-}
 
 .flex-container div {
   margin-top: 20px;
+  width: 800px;
 }

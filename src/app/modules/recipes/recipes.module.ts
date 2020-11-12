@@ -9,10 +9,11 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeInfoComponent } from './recipe-detail/recipe-info/recipe-info.component';
 import { RecipeIngredientsListComponent } from './recipe-detail/recipe-ingredients-list/recipe-ingredients-list.component';
 import { NewRecipeDialogComponent } from './page/new-recipe-dialog/new-recipe-dialog.component';
+import { AddFlavourComponent } from './recipe-detail/add-flavour/add-flavour.component';
 
 
 @NgModule({
-  declarations: [RecipesComponent, RecipeListComponent, RecipeDetailComponent, RecipeInfoComponent, RecipeIngredientsListComponent, NewRecipeDialogComponent],
+  declarations: [RecipesComponent, RecipeListComponent, RecipeDetailComponent, RecipeInfoComponent, RecipeIngredientsListComponent, NewRecipeDialogComponent, AddFlavourComponent],
   imports: [
     CommonModule,
     RecipesRoutingModule,

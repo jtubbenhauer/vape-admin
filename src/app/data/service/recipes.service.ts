@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Recipes } from "../schema/recipes";
 import { map } from 'rxjs/operators';
+import { Router, RouterModule } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private router: Router) { }
 
   getRecipes() {
     return this.afs.collection('recipes').snapshotChanges().pipe(map(
@@ -26,6 +27,23 @@ export class RecipesService {
 
   getIngredients(id) {
     return this.afs.collection('recipes').doc(id).collection('flavours').valueChanges();
+  }
+
+  addIngredient(data) {
+    this.afs.collection('recipes').doc(data.id).collection('flavours').add({
+      'supplier': data.supplier,
+      'name': data.name,
+      'percentage': data.percentage
+    })
+  }
+
+  addRecipeAndRedirect(name, collection) {
+    this.afs.collection('recipes').add({
+      'name': name,
+      'collection': collection
+    }).then(doc => {
+      this.router.navigate(['recipes/' + doc.id])
+    })
   }
 
 }
