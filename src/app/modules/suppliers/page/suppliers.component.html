@@ -1,6 +1,10 @@
-
-<div class="container">
-  <button mat-raised-button (click)="openDialog()" color="primary">Add Supplier</button>
-
-  <app-suppliers-list class="item-table"></app-suppliers-list>
+<div class="flex-container">
+  <div>
+    <mat-card>
+      <button mat-raised-button (click)="openDialog()" color="primary">Add Supplier</button>
+    </mat-card>
+  </div>
+  <div>
+    <app-suppliers-list></app-suppliers-list>
+  </div>
 </div>

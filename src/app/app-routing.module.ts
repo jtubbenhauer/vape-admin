@@ -30,6 +30,11 @@ const routes: Routes = [{
       path: 'recipes',
       loadChildren: () =>
         import('@modules/recipes/recipes.module').then(m => m.RecipesModule)
+    },
+    {
+      path: 'mixing',
+      loadChildren: () =>
+        import('@modules/mixing/mixing.module').then(m => m.MixingModule)
     }
   ]
 }]

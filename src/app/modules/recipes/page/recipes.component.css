@@ -5,8 +5,7 @@
   align-items: center;
 }
 
-
-.flex-container div {
+.flex-container .mat-card {
   margin-top: 20px;
-  width: 800px;
+  width: 700px;
 }
