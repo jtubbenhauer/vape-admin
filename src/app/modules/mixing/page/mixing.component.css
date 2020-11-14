@@ -11,3 +11,13 @@
     justify-content: center;
     width: 800px;
 }
+
+.content-card {
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+
+.mat-tab-group {
+    height: 100%;
+}

@@ -1,9 +1,20 @@
 <div class="flex-container">
     <div>
-        <h1>Mixing</h1>
+        <mat-tab-group mat-align-tabs="center" dynamicHeight>
+            <mat-tab label="Concentrate">
+                <div class="tab-content">
+                    <mat-card class="content-card">
+                        <app-concentrate></app-concentrate>
+                    </mat-card>
+                    <mat-card class="content-card">
+                        <app-concentrate-table></app-concentrate-table>
+                    </mat-card>
+                </div>
+            </mat-tab>
+            <mat-tab label="Ready To Vape">Content 2</mat-tab>
+            <mat-tab label="Doubler">Content 3</mat-tab>
+            <mat-tab label="Quick-Mix">Content 3</mat-tab>
+        </mat-tab-group>
     </div>
-    <hr>
-    <mat-card>
-        Hoya
-    </mat-card>
+    
 </div>
