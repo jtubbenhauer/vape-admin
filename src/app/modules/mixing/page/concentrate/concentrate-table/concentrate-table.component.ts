@@ -2,6 +2,14 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+export interface Concentrate {
+  flavour: string;
+  percentage: number;
+  quantity: number;
+}
+
+const ConcentrateData: Concentrate[] = [];
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -29,8 +37,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ConcentrateTableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['name', 'percentage', 'quantity'];
+  dataSource = new MatTableDataSource(ConcentrateData);
 
   @ViewChild(MatSort) sort: MatSort;
 

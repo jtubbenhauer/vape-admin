@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { MixingConcentrateService } from 'app/data/service/mixing-concentrate.se
 
 export interface Recipe {
   name: string;
+  id: string;
 }
 
 @Component({
@@ -18,8 +19,10 @@ export class ConcentrateComponent implements OnInit {
   recipeList: Recipe[] = [];
   recipe = new FormControl();
   filteredOptions: Observable<Recipe[]>;
-  id: string;
-  size = new FormControl('1800');
+  size = new FormControl(1800);
+  recipeID: string;
+
+  tableData = [];
 
   constructor( private service: MixingConcentrateService ) {
 
@@ -28,8 +31,10 @@ export class ConcentrateComponent implements OnInit {
   ngOnInit(): void {
     this.service.getRecipesValue().subscribe(res => {
       res.map(i => {
-        this.recipeList.push(
-          {name: i.payload.doc.data()['name']}
+        this.recipeList.push({
+          name: i.payload.doc.data()['name'],
+          id: i.payload.doc.id
+        }
         )
       });
       this.filteredOptions = this.recipe.valueChanges
@@ -53,11 +58,8 @@ export class ConcentrateComponent implements OnInit {
   }
 
   clickHandler() {
-    this.service.getIdFromName(this.recipe.value.name).subscribe(res => {
-      res.map(i => {
-        this.id = i.payload.doc.id;        
-      })
-    })
+    this.recipeID = this.recipe.value['id'];
+    this.service.createRecipe(this.recipeID, this.size.value)
   }
 
 
