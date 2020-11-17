@@ -20,34 +20,14 @@ export class MixingConcentrateService {
     return this.afs.collection('recipes').snapshotChanges();
   }
 
-  createRecipe(id: string, size: number) {
+  getFlavoursFromID(id: string) {
+    return this.afs.collection('recipes').doc(id).collection('flavours').valueChanges();
+  }
 
-    this.recipe = [];
+  getStockOnHand(recipe) {
+    return this.afs.collection('flavours', ref => ref.where('supplier', '==', recipe['supplier']).where('name', '==', recipe['name'])).valueChanges();
+  }
 
-
-
-    return this.afs.collection('recipes').doc(id).collection('flavours').valueChanges().subscribe(res => {
-      res.map(i => {
-        this.quantity = size * (i.percentage / 100);
-        this.recipe.push({
-          'supplier': i.supplier,
-          'name': i.name,
-          'percentage': i.percentage,
-          'quantity': this.quantity
-          });
-        });
-
-        this.recipe.map(recipe => {
-          this.afs.collection('flavours', ref => ref.where('supplier', '==', recipe['supplier']).where('name', '==', recipe['name'])).valueChanges().subscribe(res => {
-            res.map(flavour => {
-              recipe.on_hand = flavour['stock']
-            })
-          })
-        });
-        console.log(this.recipe);
-        
-      });
-    }
   
   
 }

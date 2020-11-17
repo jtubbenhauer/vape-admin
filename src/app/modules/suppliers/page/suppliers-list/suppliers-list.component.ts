@@ -12,7 +12,7 @@ import { SuppliersService } from "app/data/service/suppliers.service";
 export class SuppliersListComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name', 'delete'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -21,7 +21,6 @@ export class SuppliersListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     return this.suppliersService.getSuppliers().subscribe(res => this.dataSource.data = res);
- 
   }
 
   ngAfterViewInit(): void {
@@ -35,6 +34,12 @@ export class SuppliersListComponent implements OnInit, AfterViewInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  clickDelete(id: string) {
+    if(confirm('Confirm delete? This cannot be undone!')) {
+      this.suppliersService.deleteSupplier(id);
     }
   }
 

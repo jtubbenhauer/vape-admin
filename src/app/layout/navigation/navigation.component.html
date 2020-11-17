@@ -3,15 +3,15 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Vape Admin</mat-toolbar>
+
     <mat-nav-list>
-      <a mat-list-item href="/dashboard"><i class="las la-chart-pie"></i>Dashboard</a>
+      <a mat-list-item href="/dashboard"><i class="fas fa-chart-pie"></i>Dashboard</a>
       <mat-divider></mat-divider>
-      <a mat-list-item href="/suppliers"><i class="las la-store"></i> Suppliers</a>
-      <a mat-list-item href="/base-liquids"><i class="las la-flask"></i>Base Liquids</a>
-      <a mat-list-item href="/flavours"><i class="las la-ice-cream"></i>Flavours</a>
-      <a mat-list-item href="/recipes"><i class="las la-blender"></i>Recipes</a>
-      <a mat-list-item href="/mixing"><i class="las la-weight"></i>Mixing</a>
+      <a mat-list-item href="/suppliers"><i class="fas fa-store"></i> Suppliers</a>
+      <a mat-list-item href="/base-liquids"><i class="fas fa-flask"></i>Base Liquids</a>
+      <a mat-list-item href="/flavours"><i class="fas fa-ice-cream"></i>Flavours</a>
+      <a mat-list-item href="/recipes"><i class="fas fa-blender"></i>Recipes</a>
+      <a mat-list-item href="/mixing"><i class="fas fa-weight"></i>Mixing</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -25,6 +25,8 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Vape Admin</span>
+      <span class="spacer"></span>
+      <i class="fas user-icon fa-user"></i>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -17,7 +17,6 @@
     margin-top: 10px;
 }
 
-
-.mat-tab-group {
-    height: 100%;
+.mat-tab-label {
+    background-color: #fff !important;
 }

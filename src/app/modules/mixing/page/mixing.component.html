@@ -4,10 +4,10 @@
             <mat-tab label="Concentrate">
                 <div class="tab-content">
                     <mat-card class="content-card">
-                        <app-concentrate></app-concentrate>
+                        <app-concentrate (recipeData)="newRecipe($event)"></app-concentrate>
                     </mat-card>
                     <mat-card class="content-card">
-                        <app-concentrate-table></app-concentrate-table>
+                        <app-concentrate-table [recipe]="recipe"></app-concentrate-table>
                     </mat-card>
                 </div>
             </mat-tab>

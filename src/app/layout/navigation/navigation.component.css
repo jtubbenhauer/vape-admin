@@ -14,9 +14,31 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color:#fce6d7;
+  color: #ec5103;
 }
 
-.las {
-  padding-right: 5px;
-  font-size: 1.6em;
+.fas {
+  padding-right: 10px;
+  color: #ffa270;
+}
+
+.mat-drawer {
+  background-color: #ec5103;
+}
+
+.mat-drawer-container {
+  background-color: #ffeee3 !important;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-icon {
+  color: #ec5103;
+}
+
+.mat-list-base .mat-list-item {
+  color: #fffaf8;
 }

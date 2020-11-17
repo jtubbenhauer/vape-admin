@@ -8,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MixingComponent implements OnInit {
 
+  recipe: any;
 
   constructor() { }
 
   ngOnInit(): void {
     
+  }
+
+  newRecipe(recipe) {
+    this.recipe = recipe;
   }
 
 }

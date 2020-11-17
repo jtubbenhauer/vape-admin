@@ -33,7 +33,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-weight: 500;
 }
 
-hr {
-  border-top: 1px solid rgb(197, 197, 197);
-  width: 70%;
+
+
+.fas {
+  font-size: 1.3em;
+  color: #585858
 }

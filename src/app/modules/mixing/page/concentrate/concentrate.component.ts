@@ -16,16 +16,20 @@ export interface Recipe {
 })
 export class ConcentrateComponent implements OnInit {
 
-  recipeList: Recipe[] = [];
   recipe = new FormControl();
-  filteredOptions: Observable<Recipe[]>;
   size = new FormControl(1800);
-  recipeID: string;
+  
+  recipeList: Recipe[] = [];
+  filteredOptions: Observable<Recipe[]>;
 
-  tableData = [];
+  recipeID: string;
+  quantity: any;
+
+  recipeResult: any[] = [];
+
+  @Output() recipeData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor( private service: MixingConcentrateService ) {
-
   }
 
   ngOnInit(): void {
@@ -46,7 +50,7 @@ export class ConcentrateComponent implements OnInit {
     })
   }
 
-
+  //Searchable Autocomplete
   displayFn(recipe: Recipe): string {
     return recipe && recipe.name ? recipe.name : '';
   }
@@ -58,9 +62,30 @@ export class ConcentrateComponent implements OnInit {
   }
 
   clickHandler() {
+    this.recipeResult = [];
     this.recipeID = this.recipe.value['id'];
-    this.service.createRecipe(this.recipeID, this.size.value)
-  }
+
+    this.service.getFlavoursFromID(this.recipe.value['id']).subscribe(res => {
+      res.map(i => {
+        this.quantity = this.size.value * (i.percentage / 100);
+        this.recipeResult.push({
+          'supplier': i.supplier,
+          'name': i.name,
+          'percentage': i.percentage,
+          'quantity': this.quantity
+        });
+      });
+      
+      this.recipeResult.map(recipe => {
+        this.service.getStockOnHand(recipe).subscribe(res => {
+          res.map(flavour => {
+            recipe.on_hand = flavour['stock']
+          })
+        })
+      });
+      this.recipeData.emit(this.recipeResult);
+    })
+  };
 
 
 }

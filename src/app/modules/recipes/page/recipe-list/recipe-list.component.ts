@@ -12,7 +12,7 @@ import { RecipesService } from 'app/data/service/recipes.service';
 })
 export class RecipeListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'collection'];
+  displayedColumns: string[] = ['name', 'collection', 'edit'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,11 +35,6 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  checkId(id) {
-    console.log(id);
-    
   }
 
   ngOnInit(): void {

@@ -3,10 +3,14 @@
 
     <h1> Flavours </h1>
     <div class="flex-item">
-      <button mat-raised-button color="primary" (click)="openAddFlavourDialog()">Add New Flavour</button>
+      <mat-card>
+        <button mat-raised-button color="primary" (click)="openAddFlavourDialog()">Add New Flavour</button>
+      </mat-card>
     </div>
     <div class="flex-item">
-      <app-flavours-table></app-flavours-table>
+      <mat-card>
+        <app-flavours-table></app-flavours-table>
+      </mat-card>
     </div>
   
 </div>

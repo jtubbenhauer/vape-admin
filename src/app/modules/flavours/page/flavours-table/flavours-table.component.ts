@@ -11,7 +11,7 @@ import { FlavoursService } from "app/data/service/flavours.service";
 })
 export class FlavoursTableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['supplier', 'name', 'stock', 'cost', 'notes'];
+  displayedColumns: string[] = ['supplier', 'name', 'stock', 'cost', 'notes', 'edit'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

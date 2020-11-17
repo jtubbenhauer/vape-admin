@@ -13,7 +13,7 @@ export class FlavoursService {
   }
 
   getFlavours() {
-    return this.afs.collection('flavours').valueChanges();
+    return this.afs.collection('flavours').valueChanges({ idField: 'id' });
   }
 
   getFlavourOptions() {
@@ -29,23 +29,4 @@ export class FlavoursService {
     })
   }
 
-
-//   Collection Group!!
-//   getFlavours() {
-//     const currentDoc = this.afs.collection('suppliers', ref => ref.where('name', '==', 'FlavourArt'));
-//     let id: any;
-
-//     currentDoc.snapshotChanges().subscribe(res => {
-//       res.map(item => {
-//         this.afs.collection(`suppliers/${item.payload.doc.id}/suppliers_flavours`).valueChanges().subscribe(res => {
-//           console.log(res);
-        
-//         })
-//     })
-
-    
-//   }
-
-//     )
-// }
 }

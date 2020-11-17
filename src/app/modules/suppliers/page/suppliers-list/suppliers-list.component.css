@@ -3,3 +3,7 @@
 .mat-table {
   width: 100%;
 }
+
+.fas {
+  cursor: pointer;
+}
