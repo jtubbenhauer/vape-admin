@@ -1,7 +1,20 @@
-table {
+  table {
     width: 100%;
   }
   
   th.mat-sort-header-sorted {
     color: black;
+  }
+
+
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .commit-button {
+    margin: 15px 30px 0 0;
+    align-self: flex-end;
   }

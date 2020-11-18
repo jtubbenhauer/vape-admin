@@ -4,20 +4,27 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-drawer {
-  background-color: #ebebeb;
+  background-color: #6F1A07;
 }
 
-.mat-toolbar {
-  background-color: rgb(63, 63, 63);
+.mat-drawer-container {
+  background-color: #FFF2EB !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #6F1A07;
 }
 
 .mat-toolbar.mat-primary {
-  background: #424242;
-  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color:#ffeae1;
+  color: #6F1A07;
 }
 
 .mat-raised-button.mat-primary {
-  background-color: #f0570b;
+  background-color: #6F1A07;
 }
 
 .mat-body, .mat-body-1, .mat-typography {
@@ -33,9 +40,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-weight: 500;
 }
 
-
-
 .fas {
   font-size: 1.3em;
-  color: #585858
+  padding-right: 10px;
+  color: #B76552;
 }

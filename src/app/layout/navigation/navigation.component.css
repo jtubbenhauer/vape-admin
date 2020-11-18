@@ -10,33 +10,15 @@
   background: inherit;
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color:#fce6d7;
-  color: #ec5103;
-}
 
-.fas {
-  padding-right: 10px;
-  color: #ffa270;
-}
 
-.mat-drawer {
-  background-color: #ec5103;
-}
-
-.mat-drawer-container {
-  background-color: #ffeee3 !important;
-}
 
 .spacer {
   flex: 1 1 auto;
 }
 
 .user-icon {
-  color: #ec5103;
+  color: #6F1A07;
 }
 
 .mat-list-base .mat-list-item {

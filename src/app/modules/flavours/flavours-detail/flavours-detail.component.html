@@ -1,1 +1,46 @@
-<p>flavours-detail works!</p>
+<div class="flex-container">
+  <mat-card>
+    <mat-card-title>
+      <h1>{{flavourData.supplier}} - {{flavourData.name}}</h1>
+    </mat-card-title>
+    <mat-card-content>
+      
+      <div class="row-container">
+        <mat-form-field>
+          <mat-label>Supplier</mat-label>
+          <mat-select [(value)]="flavourData.supplier">
+            <mat-option *ngFor="let item of suppliers" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput [formControl]="name" value="{{flavourData.name}}">
+        </mat-form-field>
+      </div>
+      <div class="row-container">
+        <mat-form-field>
+          <mat-label>Stock On Hand</mat-label>
+          <input matInput value={{flavourData.stock}}>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Cost</mat-label>
+          <input matInput value={{flavourData.cost}}>
+        </mat-form-field>
+      </div>
+      <div class="textarea-div">
+        <mat-form-field>
+          <mat-label>Notes</mat-label>
+          <textarea matInput value={{flavourData.notes}}></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="clickHandler()">Save</button>
+      </div>
+      
+    </mat-card-content>
+  </mat-card>
+</div>
+

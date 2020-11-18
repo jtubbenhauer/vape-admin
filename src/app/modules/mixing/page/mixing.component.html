@@ -3,12 +3,12 @@
         <mat-tab-group mat-align-tabs="center" dynamicHeight>
             <mat-tab label="Concentrate">
                 <div class="tab-content">
-                    <mat-card class="content-card">
-                        <app-concentrate (recipeData)="newRecipe($event)"></app-concentrate>
-                    </mat-card>
-                    <mat-card class="content-card">
-                        <app-concentrate-table [recipe]="recipe"></app-concentrate-table>
-                    </mat-card>
+                  <div class="content-div">
+                    <app-concentrate (recipeData)="newRecipe($event)"></app-concentrate>
+                  </div>
+                  <div class="content-div">
+                    <app-concentrate-table [recipe]="recipe"></app-concentrate-table>
+                  </div>
                 </div>
             </mat-tab>
             <mat-tab label="Ready To Vape">Content 2</mat-tab>

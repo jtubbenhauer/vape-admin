@@ -1,30 +1,44 @@
-<table mat-table [dataSource]="dataSource" matSort>
+<mat-card>
+  <div class="flex-container">
+    <div>
+      <table mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="supplier">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
-      <td mat-cell *matCellDef="let element"> {{element.supplier}} </td>
-    </ng-container>
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+          <td mat-cell *matCellDef="let element"> {{element.supplier}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="percentage">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Percentage </th>
+          <td mat-cell *matCellDef="let element"> {{element.percentage}}% </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="on_hand">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock On Hand </th>
+          <td mat-cell *matCellDef="let element"> {{element.on_hand}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="percentage">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Percentage </th>
-      <td mat-cell *matCellDef="let element"> {{element.percentage}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-    </ng-container>
+    <div class="commit-button">
+      <button mat-raised-button color="primary">Commit</button>
+    </div>
 
-    <ng-container matColumnDef="on_hand">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock On Hand </th>
-      <td mat-cell *matCellDef="let element"> {{element.on_hand}} </td>
-    </ng-container>
+  </div>
   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+</mat-card>
+
+

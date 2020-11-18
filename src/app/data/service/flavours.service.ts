@@ -20,6 +20,10 @@ export class FlavoursService {
     return this.afs.collection('flavours').snapshotChanges();
   }
 
+  getFlavourFromID(id) {
+    return this.afs.collection('flavours').doc(id).valueChanges();
+  }
+
   addFlavour(data) {
     return this.afs.collection('flavours').add({
       'supplier': data.supplier,

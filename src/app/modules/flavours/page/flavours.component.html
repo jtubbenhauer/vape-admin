@@ -1,18 +1,17 @@
-<div class="flex-container">
-  
 
+
+<div class="flex-container">
+  <div>
     <h1> Flavours </h1>
-    <div class="flex-item">
-      <mat-card>
-        <button mat-raised-button color="primary" (click)="openAddFlavourDialog()">Add New Flavour</button>
-      </mat-card>
+  </div>  
+  <mat-card>
+    <div class="button-div">
+      <button mat-raised-button color="primary" (click)="openAddFlavourDialog()">Add New Flavour</button>
     </div>
-    <div class="flex-item">
-      <mat-card>
-        <app-flavours-table></app-flavours-table>
-      </mat-card>
+    <div>
+      <app-flavours-table></app-flavours-table>
     </div>
-  
+  </mat-card>
 </div>
 
 

@@ -1,15 +1,18 @@
 .flex-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.flex-item {
-  width: 60vw;
-  margin: 20px;
+.flex-container .mat-card {
+  margin-top: 20px;
+  width: 700px;
+}
 
+.flex-container .mat-card .button-div {
+  display: flex;
+  align-content: center;
 }
 
 th.mat-header-cell {
