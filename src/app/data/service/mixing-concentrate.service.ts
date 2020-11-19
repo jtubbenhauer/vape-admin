@@ -14,6 +14,8 @@ export class MixingConcentrateService {
   on_hand: any;
   quantity: any;
 
+  flavourId: string;
+
   constructor(private afs: AngularFirestore) { }
 
   getRecipesValue() {
@@ -28,7 +30,13 @@ export class MixingConcentrateService {
     return this.afs.collection('flavours', ref => ref.where('supplier', '==', recipe['supplier']).where('name', '==', recipe['name'])).valueChanges();
   }
 
-  
+  getFlavourID(supplier, name) {
+    return this.afs.collection('flavours', ref => ref.where('supplier', '==', supplier).where('name', '==', name)).snapshotChanges();
+  }
+
+  updateFlavourStock(id, newStock) {
+    this.afs.collection('flavours').doc(id).update({'stock': newStock})
+  }
   
 }
 

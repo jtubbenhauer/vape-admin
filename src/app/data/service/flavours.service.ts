@@ -33,4 +33,9 @@ export class FlavoursService {
     })
   }
 
+  updateFlavour(id, data) {
+    this.afs.collection('flavours').doc(id).update(data);
+    window.alert('Flavour updated');
+  }
+
 }

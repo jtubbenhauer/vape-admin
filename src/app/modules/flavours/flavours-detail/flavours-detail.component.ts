@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { FlavoursService } from 'app/data/service/flavours.service';
 
@@ -8,7 +8,7 @@ export class Flavour {
   supplier: string;
   stock: string;
   cost: string;
-  notes?: string;
+  notes: string;
 }
 
 @Component({
@@ -20,33 +20,46 @@ export class FlavoursDetailComponent implements OnInit {
 
   id: string;
   flavourData = new Flavour();
+  updateData = new Flavour();
+
   suppliers: any = [];
-  name = new FormControl()
+  
+  flavourForm = new FormGroup({
+    name: new FormControl(),
+    supplier: new FormControl(),
+    stock: new FormControl(),
+    cost: new FormControl(),
+    notes: new FormControl('')
+  })
 
   constructor(private route: ActivatedRoute, private service: FlavoursService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.initData();
+  }
 
-    this.service.getFlavourFromID(this.id).subscribe(res => {
-      this.flavourData.supplier = res['supplier'];
-      this.flavourData.name = res['name'];
-      this.flavourData.stock = res['stock'];
-      this.flavourData.cost = res['cost'];
-      this.flavourData.notes = res['notes'];
-    });
+  initData() {
 
     this.service.getSuppliers().subscribe(res => {
       res.map(i => {
         this.suppliers.push(i['name'])
       })
     })
+
+    this.service.getFlavourFromID(this.id).subscribe(res => {
+      this.flavourData.supplier = res['supplier'];
+      this.flavourData.name = res['name'];
+      this.flavourData.stock = res['stock'];
+      this.flavourData.cost = res['cost'];
+      res['notes'] ? this.flavourData.notes = res['notes'] : this.flavourData.notes = 'None';
+      this.flavourForm.setValue(this.flavourData)
+    });
+    
   }
 
   clickHandler() {
-    this.name.value ? console.log(this.name.value) : console.log(this.flavourData.name);
-      
-  
+      this.service.updateFlavour(this.id, this.flavourForm.value);
   }
 
 }

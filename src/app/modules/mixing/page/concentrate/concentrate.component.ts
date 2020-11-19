@@ -24,6 +24,7 @@ export class ConcentrateComponent implements OnInit {
 
   recipeID: string;
   quantity: any;
+  percentages: any[];
 
   recipeResult: any[] = [];
 
@@ -64,6 +65,10 @@ export class ConcentrateComponent implements OnInit {
   clickHandler() {
     this.recipeResult = [];
     this.recipeID = this.recipe.value['id'];
+
+    this.percentages = [];
+
+    //Fix this first. Size * (percentage/ sum of all percentages)
 
     this.service.getFlavoursFromID(this.recipe.value['id']).subscribe(res => {
       res.map(i => {
