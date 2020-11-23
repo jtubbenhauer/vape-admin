@@ -6,8 +6,8 @@ import { FlavoursService } from 'app/data/service/flavours.service';
 export class Flavour {
   name: string;
   supplier: string;
-  stock: string;
-  cost: string;
+  stock: number;
+  cost: number;
   notes: string;
 }
 
@@ -50,8 +50,8 @@ export class FlavoursDetailComponent implements OnInit {
     this.service.getFlavourFromID(this.id).subscribe(res => {
       this.flavourData.supplier = res['supplier'];
       this.flavourData.name = res['name'];
-      this.flavourData.stock = res['stock'];
-      this.flavourData.cost = res['cost'];
+      this.flavourData.stock = +parseFloat(res['stock']).toFixed(2);
+      this.flavourData.cost = +parseFloat(res['cost']).toFixed(2);
       res['notes'] ? this.flavourData.notes = res['notes'] : this.flavourData.notes = 'None';
       this.flavourForm.setValue(this.flavourData)
     });

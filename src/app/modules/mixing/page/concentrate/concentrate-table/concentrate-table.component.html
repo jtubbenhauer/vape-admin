@@ -20,7 +20,7 @@
       
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity (ml) </th>
-          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          <td style="font-weight: bold" [ngStyle]="{ 'color': element.quantity > element.on_hand ? 'red': 'black'}" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
         </ng-container>
     
         <ng-container matColumnDef="on_hand">

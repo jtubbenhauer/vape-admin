@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MixingConcentrateService } from 'app/data/service/mixing-concentrate.service';
+import { MixingService } from 'app/data/service/mixing.service';
 
 export interface Recipe {
   name: string;
@@ -25,12 +25,13 @@ export class ConcentrateComponent implements OnInit {
   recipeID: string;
   quantity: any;
   percentages: any[];
+  totalPercentage: number;
 
   recipeResult: any[] = [];
 
   @Output() recipeData: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor( private service: MixingConcentrateService ) {
+  constructor( private service: MixingService ) {
   }
 
   ngOnInit(): void {
@@ -65,31 +66,37 @@ export class ConcentrateComponent implements OnInit {
   clickHandler() {
     this.recipeResult = [];
     this.recipeID = this.recipe.value['id'];
-
     this.percentages = [];
+    this.totalPercentage = 0;
 
-    //Fix this first. Size * (percentage/ sum of all percentages)
-
-    this.service.getFlavoursFromID(this.recipe.value['id']).subscribe(res => {
+    this.service.getFlavoursFromID(this.recipeID).subscribe(res => {
       res.map(i => {
-        this.quantity = this.size.value * (i.percentage / 100);
-        this.recipeResult.push({
-          'supplier': i.supplier,
-          'name': i.name,
-          'percentage': i.percentage,
-          'quantity': this.quantity
+        this.totalPercentage += +i.percentage
+      });
+      this.service.getFlavoursFromID(this.recipeID).subscribe(res => {
+        res.map(i => {
+          this.quantity = this.size.value * (i.percentage / this.totalPercentage);
+          this.recipeResult.push({
+            'supplier': i.supplier,
+            'name': i.name,
+            'percentage': i.percentage,
+            'quantity': +this.quantity.toFixed(2)
+          });
         });
-      });
-      
-      this.recipeResult.map(recipe => {
-        this.service.getStockOnHand(recipe).subscribe(res => {
-          res.map(flavour => {
-            recipe.on_hand = flavour['stock']
+        
+        this.recipeResult.map(recipe => {
+          this.service.getStockOnHand(recipe).subscribe(res => {
+            res.map(flavour => {
+              recipe.on_hand = +parseFloat(flavour['stock']).toFixed(2);
+            })
           })
-        })
-      });
-      this.recipeData.emit(this.recipeResult);
+        });
+        
+        this.recipeData.emit(this.recipeResult);
+      })
     })
+
+    
   };
 
 

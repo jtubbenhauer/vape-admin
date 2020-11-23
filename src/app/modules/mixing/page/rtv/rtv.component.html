@@ -1,0 +1,110 @@
+<div class="flex-container">
+  <mat-card>
+    <mat-card-content>
+      <form>
+        <div class="wrapper">
+          <div>
+            <mat-form-field>
+              <mat-label>Recipe</mat-label>
+              <input [formControl]="recipe" matInput [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.name}}
+                </mat-option>
+            </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Batch Size</mat-label>
+              <input matInput [formControl]="size">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>VG Percentage</mat-label>
+              <input matInput [formControl]="vgPercentage">
+            </mat-form-field>
+            <div class="alert" *ngIf="vgPercentage.errors">Must be between 50 - 80%</div>
+          </div>
+          <div class="button">
+            <button mat-raised-button color="primary" (click)="calculateButton()">Calculate</button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <div class="flex-container">
+        <div>
+          <h2>From Concentrate</h2>
+        </div>
+        <div class="table">
+          <table mat-table [dataSource]="dataSourceConc" matSort>
+    
+            <ng-container matColumnDef="concentrate">
+              <th mat-header-cell *matHeaderCellDef> Concentrate </th>
+              <td mat-cell *matCellDef="let element"> {{element.concentrate}} g </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="vg">
+              <th mat-header-cell *matHeaderCellDef> VG </th>
+              <td mat-cell *matCellDef="let element"> {{element.vg}} g </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="pg">
+              <th mat-header-cell *matHeaderCellDef> PG </th>
+              <td mat-cell *matCellDef="let element"> {{element.pg}} g </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsConc"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsConc;"></tr>
+          </table>
+        </div>
+    
+        <div class="commit-button">
+          <button mat-raised-button color="primary" (click)="commitRTV()">Commit</button>
+        </div>
+    
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card>
+    <mat-card-content>
+      <div class="flex-container">
+        <div>
+          <h2>From Doubler @ 60/40</h2>
+        </div>
+        <div class="table">
+          <table mat-table [dataSource]="dataSourceDoubler" matSort>
+          
+            <ng-container matColumnDef="doubler">
+              <th mat-header-cell *matHeaderCellDef> Doubler </th>
+              <td mat-cell *matCellDef="let element"> {{element.doubler}} g </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="doublervg">
+              <th mat-header-cell *matHeaderCellDef> VG </th>
+              <td mat-cell *matCellDef="let element"> {{element.doublervg}} g </td>
+            </ng-container>
+
+            <ng-container matColumnDef="doublerpg">
+              <th mat-header-cell *matHeaderCellDef> PG </th>
+              <td mat-cell *matCellDef="let element"> {{element.doublerpg}} g </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsDoubler"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsDoubler;"></tr>
+          </table>
+        </div>
+    
+        <div class="commit-button">
+          <button mat-raised-button color="primary" (click)="commitDoubler()">Commit</button>
+        </div>
+    
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -3,12 +3,23 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
 .mat-drawer {
   background-color: #6F1A07;
 }
 
+.mat-cell, .mat-header-cell {
+  font-size: 16px !important;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  padding: 0 20px 0 20px;
+}
+
 .mat-drawer-container {
-  background-color: #FFF2EB !important;
+  background-color: #fff8f4 !important;
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
@@ -44,4 +55,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 1.3em;
   padding-right: 10px;
   color: #B76552;
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 12px !important;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding-left: 12px !important;
+}
+
+.mat-card {
+  width: 800px;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  .mat-card {
+    width: 400px;
+  }
+}
+
+.mat-input-element {
+  font-size: 16px !important;
 }

@@ -1,7 +1,4 @@
-  table {
-    width: 100%;
-  }
-  
+
   th.mat-sort-header-sorted {
     color: black;
   }
@@ -11,7 +8,6 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: auto;
   }
 
   .commit-button {

@@ -1,17 +1,23 @@
 <div class="flex-container">
-    <div>
-        <mat-tab-group mat-align-tabs="center" dynamicHeight>
+    <div style="margin-top: 15px;">
+        <mat-tab-group mat-align-tabs="center" animationDuration="0ms" dynamicHeight>
             <mat-tab label="Concentrate">
-                <div class="tab-content">
-                  <div class="content-div">
+                <div class="flex-container">
+                  <div class="item">
                     <app-concentrate (recipeData)="newRecipe($event)"></app-concentrate>
                   </div>
-                  <div class="content-div">
+                  <div class="item">
                     <app-concentrate-table [recipe]="recipe"></app-concentrate-table>
                   </div>
                 </div>
             </mat-tab>
-            <mat-tab label="Ready To Vape">Content 2</mat-tab>
+            <mat-tab label="Ready To Vape">
+              <div class="flex-container">
+                <div class="item">
+                  <app-rtv></app-rtv>
+                </div>
+              </div>
+            </mat-tab>
             <mat-tab label="Doubler">Content 3</mat-tab>
             <mat-tab label="Quick-Mix">Content 3</mat-tab>
         </mat-tab-group>

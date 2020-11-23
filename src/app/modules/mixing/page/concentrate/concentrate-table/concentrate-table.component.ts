@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MixingConcentrateService } from 'app/data/service/mixing-concentrate.service';
+import { MixingService } from 'app/data/service/mixing.service';
 
 @Component({
   selector: 'app-concentrate-table',
@@ -23,7 +23,7 @@ export class ConcentrateTableComponent implements OnInit, OnChanges {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private service: MixingConcentrateService) { }
+  constructor(private service: MixingService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataSource = new MatTableDataSource(changes.recipeData.currentValue)

@@ -18,6 +18,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDialogModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSliderModule
   
   ],
   exports: [
@@ -63,7 +65,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDialogModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSliderModule
     
   ]
 })
