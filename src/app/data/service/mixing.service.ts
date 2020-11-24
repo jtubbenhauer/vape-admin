@@ -29,15 +29,15 @@ export class MixingService {
   }
 
   calcConcentrate(size, percentage) {
-    return +((size * (percentage / 100)) * 1.0361).toFixed(2);
+    return +((size * (percentage / 100)) * 1.0361).toFixed(1);
   }
 
   calcVG(size, vgPercentage) {
-    return +((size * (vgPercentage / 100)) * 1.261).toFixed(2);
+    return +((size * (vgPercentage / 100)) * 1.261).toFixed(1);
   }
 
   calcPG(size, addConc, addVG) {
-    return +((size - (addVG / 1.261)-(addConc / 1.0361))*1.0361).toFixed(2);
+    return +((size - (addVG / 1.261)-(addConc / 1.0361))*1.0361).toFixed(1);
   }
   
   getVGStock() {

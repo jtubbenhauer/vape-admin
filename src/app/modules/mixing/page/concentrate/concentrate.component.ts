@@ -80,14 +80,14 @@ export class ConcentrateComponent implements OnInit {
             'supplier': i.supplier,
             'name': i.name,
             'percentage': i.percentage,
-            'quantity': +this.quantity.toFixed(2)
+            'quantity': +this.quantity.toFixed(1)
           });
         });
         
         this.recipeResult.map(recipe => {
           this.service.getStockOnHand(recipe).subscribe(res => {
             res.map(flavour => {
-              recipe.on_hand = +parseFloat(flavour['stock']).toFixed(2);
+              recipe.on_hand = +parseFloat(flavour['stock']).toFixed(1);
             })
           })
         });

@@ -65,10 +65,10 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
   padding-left: 12px !important;
 }
 
-.mat-card {
+/* .mat-card {
   width: 800px;
   margin-bottom: 15px;
-}
+} */
 
 @media screen and (max-width: 800px) {
   .mat-card {

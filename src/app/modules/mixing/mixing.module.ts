@@ -7,10 +7,11 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ConcentrateComponent } from './page/concentrate/concentrate.component';
 import { ConcentrateTableComponent } from './page/concentrate/concentrate-table/concentrate-table.component';
 import { RtvComponent } from './page/rtv/rtv.component';
+import { DoublerComponent } from './page/doubler/doubler.component';
 
 
 @NgModule({
-  declarations: [MixingComponent, ConcentrateComponent, ConcentrateTableComponent, RtvComponent],
+  declarations: [MixingComponent, ConcentrateComponent, ConcentrateTableComponent, RtvComponent, DoublerComponent],
   imports: [
     CommonModule,
     MixingRoutingModule,
