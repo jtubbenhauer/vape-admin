@@ -1,42 +1,43 @@
-<div class="flex-container">
-  <mat-card>
-    <mat-card-content>
-      <form>
-        <div class="wrapper">
-          <div>
-            <mat-form-field>
-              <mat-label>Recipe</mat-label>
-              <input [formControl]="recipe" matInput [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{option.name}}
-                </mat-option>
-            </mat-autocomplete>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field>
-              <mat-label>Batch Size</mat-label>
-              <input matInput [formControl]="size">
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field>
-              <mat-label>VG Percentage</mat-label>
-              <input matInput [formControl]="vgPercentage">
-            </mat-form-field>
-            <div class="alert" *ngIf="vgPercentage.errors">Must be between 50 - 80%</div>
-          </div>
-          <div class="button">
-            <button mat-raised-button color="primary" (click)="calculateButton()">Calculate</button>
-          </div>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-  <mat-card>
-    <mat-card-content>
-      <div class="flex-container">
+<div class="wrapper">
+  <div class="flex-container form">
+    <mat-card>
+      
+      <mat-form-field style="flex-basis: 33%">
+        <mat-label>Recipe</mat-label>
+        <input [formControl]="recipe" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    
+
+      <mat-form-field>
+        <mat-label>Batch Size</mat-label>
+        <input matInput [formControl]="size">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>VG Percentage</mat-label>
+        <input matInput [formControl]="vgPercentage">
+      </mat-form-field>
+      <div class="alert" *ngIf="vgPercentage.errors">Must be between 50 - 80%</div>
+
+      <div class="button">
+        <button mat-raised-button color="primary" (click)="calculateButton()">Calculate</button>
+      </div>
+
+    </mat-card>
+  </div>
+  <div class="flex-container sidebar">
+    <mat-card>
+      <app-base-liquids-widget></app-base-liquids-widget>
+    </mat-card>
+  </div>
+  <div class="table1">
+    <div class="flex-container">
+      <mat-card>
         <div>
           <h2>From Concentrate</h2>
         </div>
@@ -66,14 +67,12 @@
         <div class="commit-button">
           <button mat-raised-button color="primary" (click)="commitRTV()">Commit</button>
         </div>
-    
-      </div>
-    </mat-card-content>
-  </mat-card>
-  
-  <mat-card>
-    <mat-card-content>
-      <div class="flex-container">
+      </mat-card>
+    </div>
+  </div>
+  <div class="table2">
+    <div class="flex-container">
+      <mat-card>
         <div>
           <h2>From Doubler @ 60/40</h2>
         </div>
@@ -103,8 +102,7 @@
         <div class="commit-button">
           <button mat-raised-button color="primary" (click)="commitDoubler()">Commit</button>
         </div>
-    
-      </div>
-    </mat-card-content>
-  </mat-card>
+      </mat-card>
+    </div>
+  </div>
 </div>

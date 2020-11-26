@@ -22,7 +22,7 @@ function vgPercentValidator(control: FormControl) {
 @Component({
   selector: 'app-rtv',
   templateUrl: './rtv.component.html',
-  styleUrls: ['./rtv.component.css']
+  styleUrls: ['./rtv.component.css', '../mixing.component.css']
 })
 export class RtvComponent implements OnInit {
 

@@ -1,8 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MixingService } from 'app/data/service/mixing.service';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface Recipe {
   name: string;
@@ -12,9 +14,18 @@ export interface Recipe {
 @Component({
   selector: 'app-concentrate',
   templateUrl: './concentrate.component.html',
-  styleUrls: ['./concentrate.component.css']
+  styleUrls: ['./concentrate.component.css', '../mixing.component.css']
 })
 export class ConcentrateComponent implements OnInit {
+
+  displayedColumns: string[] = ['supplier', 'name', 'percentage', 'quantity', 'on_hand'];
+  dataSource = new MatTableDataSource();
+  @ViewChild(MatSort) sort: MatSort;
+
+  newStock: number;
+  flavourID: string;
+
+  updateStock: any = [];
 
   recipe = new FormControl();
   size = new FormControl(1800);
@@ -29,9 +40,11 @@ export class ConcentrateComponent implements OnInit {
 
   recipeResult: any[] = [];
 
-  @Output() recipeData: EventEmitter<any> = new EventEmitter<any>();
-
   constructor( private service: MixingService ) {
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
@@ -91,13 +104,35 @@ export class ConcentrateComponent implements OnInit {
             })
           })
         });
-        
-        this.recipeData.emit(this.recipeResult);
+        this.dataSource.data = this.recipeResult
       })
     })
-
-    
   };
+
+  commitBatch() {
+
+    if(this.dataSource.data.length === 0) {
+      window.alert('Please choose a recipe')
+    } else {
+      this.dataSource.data.map(field => {
+
+        let counter: number = 0;
+  
+        this.service.getFlavourID(field['supplier'], field['name']).subscribe(res => {
+          res.map(i => {
+            this.flavourID = i.payload.doc.id;
+            this.newStock = field['on_hand'] - field['quantity'];
+            if(counter === 0) {
+              this.service.updateFlavourStock(this.flavourID, this.newStock);
+              counter++;
+            }
+          });
+        });
+      })
+      window.alert('Batch committed')
+    }
+
+  }
 
 
 }

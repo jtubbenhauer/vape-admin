@@ -1,8 +1,9 @@
 
 <mat-tab-group mat-align-tabs="center" animationDuration="0ms" dynamicHeight>
     <mat-tab label="Concentrate">
-          <app-concentrate (recipeData)="newRecipe($event)"></app-concentrate>
-          <app-concentrate-table [recipe]="recipe"></app-concentrate-table>
+      <div class="wrapper">
+        <app-concentrate></app-concentrate>
+      </div>
     </mat-tab>
     <mat-tab label="Ready To Vape">
           <app-rtv></app-rtv>
