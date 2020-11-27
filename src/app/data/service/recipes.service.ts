@@ -46,5 +46,9 @@ export class RecipesService {
     })
   }
 
+  deleteRecipe(id) {
+    return this.afs.collection('recipes').doc(id).delete();
+  }
+
 }
 

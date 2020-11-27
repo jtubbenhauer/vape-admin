@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlavoursService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private router: Router) { }
 
   getSuppliers() {
     return this.afs.collection('suppliers').valueChanges();
@@ -36,6 +37,11 @@ export class FlavoursService {
   updateFlavour(id, data) {
     this.afs.collection('flavours').doc(id).update(data);
     window.alert('Flavour updated');
+  }
+
+  deleteFlavour(id) {
+    this.afs.collection('flavours').doc(id).delete();
+    this.router.navigate(['flavours']);
   }
 
 }

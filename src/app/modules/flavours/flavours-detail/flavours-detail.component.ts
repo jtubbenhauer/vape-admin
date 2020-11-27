@@ -62,4 +62,10 @@ export class FlavoursDetailComponent implements OnInit {
       this.service.updateFlavour(this.id, this.flavourForm.value);
   }
 
+  deleteHandler() {
+    if(confirm('Are you sure?')) {
+      this.service.deleteFlavour(this.id);      
+    }
+  }
+
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from "@angular/forms";
 import { MixingService } from 'app/data/service/mixing.service';
@@ -14,7 +13,7 @@ export interface Recipe {
 
 function vgPercentValidator(control: FormControl) {
   let percent = control.value;
-  if (percent < 50 || percent > 80) {
+  if (percent < 40 || percent > 65) {
     return { 'vgPercentValidator': true }
   }
   return null;
@@ -28,13 +27,19 @@ function vgPercentValidator(control: FormControl) {
 export class DoublerComponent implements OnInit {
 
   dataSource = new MatTableDataSource();
+  tableData = [];
   displayedColumns: string[] = ['concentrate', 'vg', 'pg']
-  recipeList: Recipe[] = [];
   filteredOptions: Observable<Recipe[]>;
 
   recipe = new FormControl();
   size = new FormControl(1800);
-  vgPercentage = new FormControl(70, vgPercentValidator);
+  vgPercentage = new FormControl(60, vgPercentValidator);
+
+  recipeList: Recipe[] = [];
+  totalPercentage: number;
+  addConcentrate: number;
+  addVG: number;
+  addPG: number;
 
 
   constructor(private service: MixingService) { }
@@ -68,7 +73,25 @@ export class DoublerComponent implements OnInit {
   }
 
   calculateButton() {
+    this.tableData = [];
+    this.totalPercentage = 0;
 
+    this.service.getFlavoursFromID(this.recipe.value['id']).subscribe(res => {
+      res.map(i => {
+        this.totalPercentage += +i.percentage;
+      });
+      this.addConcentrate = this.service.calcConcentrate(this.size.value, this.totalPercentage) * 2;
+      this.addVG = +(((this.vgPercentage.value / 100) * this.size.value) * 1.261).toFixed(1);
+      this.addPG = +( (this.size.value - (this.addVG / 1.261) - this.addConcentrate) * 1.0361 ).toFixed(1);      
+      this.tableData.push({
+        'concentrate': this.addConcentrate,
+        'vg': this.addVG,
+        'pg': this.addPG
+      });
+
+      this.dataSource.data = this.tableData
+    })
+    
   }
 
   commitButton() {

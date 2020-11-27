@@ -21,8 +21,12 @@ export class FlavoursTableComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     return this.service.getFlavours().subscribe(res => {
+      res.map(i => {
+        i['stock'] = +parseFloat(i['stock']).toFixed(1);
+      });
       this.dataSource.data = res;
-    })
+    });
+
   }
 
   ngAfterViewInit() {
