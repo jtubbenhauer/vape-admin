@@ -41,7 +41,7 @@ export class FlavoursService {
 
   deleteFlavour(id) {
     this.afs.collection('flavours').doc(id).delete();
-    this.router.navigate(['flavours']);
+    this.router.navigate(['admin/flavours']);
   }
 
 }

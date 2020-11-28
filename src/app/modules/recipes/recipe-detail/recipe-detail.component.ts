@@ -27,7 +27,7 @@ export class RecipeDetailComponent implements OnInit {
   deleteHandler() {
     if(confirm('Are you sure?')) {
       this.service.deleteRecipe(this.id);
-      this.router.navigate(['recipes']);
+      this.router.navigate(['admin/recipes']);
     }
   }
 

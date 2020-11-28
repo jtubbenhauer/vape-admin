@@ -1,0 +1,17 @@
+<div class="flex-container">
+    <div class="item">
+        <mat-card>
+            <div class="flex-container">
+                <mat-form-field>
+                    <mat-label>Email Address</mat-label>
+                    <input type="email" matInput [formControl]="emailField" placeholder="Ex. name@email.com">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [formControl]="passwordField">
+                </mat-form-field>
+                <button mat-raised-button color="primary">Register</button>
+            </div>
+        </mat-card>
+    </div>
+</div>
