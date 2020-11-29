@@ -5,3 +5,11 @@
     align-items: center;
     height: 60%;
 }
+
+.mat-card {
+  width: 400px;
+}
+
+.mat-raised-button {
+  margin: 20px;
+}

@@ -1,0 +1,56 @@
+<div class="wrapper">
+  <div class="flex-container form">
+    <mat-card>
+      <div class="form-wrapper">
+        <mat-form-field class="recipe">
+          <mat-label>Recipe</mat-label>
+          <input [formControl]="recipe" matInput [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="finalsize">
+          <mat-label>Final Size</mat-label>
+          <input matInput [formControl]="size">
+        </mat-form-field>
+        <mat-form-field class="nicvg">
+          <mat-label>Nic VG%</mat-label>
+          <input matInput [formControl]="nicvg">
+        </mat-form-field>
+        <mat-form-field class="nicstrength">
+          <mat-label>Nic Strength</mat-label>
+          <input matInput [formControl]="nicstrength">
+        </mat-form-field>
+        <mat-form-field class="targetvg">
+          <mat-label>Target VG%</mat-label>
+          <input matInput [formControl]="targetvg">
+        </mat-form-field>
+        <mat-form-field class="targetnic">
+          <mat-label>Target Nic</mat-label>
+          <input matInput [formControl]="targetnic">
+        </mat-form-field>
+        <div class="calcbutton">
+          <button mat-raised-button color="primary">Calculate</button>
+        </div>
+      </div>
+
+    </mat-card>
+  </div>
+  <div class="flex-container sidebar">
+    <mat-card>
+      <app-base-liquids-widget></app-base-liquids-widget>
+    </mat-card>
+  </div>
+  <div class="flex-container table1">
+    <mat-card>
+
+    </mat-card>
+  </div>
+  <div class="flex-container table2">
+    <mat-card>
+      
+    </mat-card>
+  </div>
+</div>

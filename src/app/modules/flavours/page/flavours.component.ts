@@ -27,6 +27,8 @@ export class FlavoursComponent implements OnInit {
   constructor(private dialog: MatDialog, private service: FlavoursService) { }
 
   openAddFlavourDialog(): void {
+    console.log(this.supplierList);
+    
     const addFlavourDialogRef = this.dialog.open(AddFlavourDialogComponent, {
       width: '400px',
       data: {
@@ -46,7 +48,7 @@ export class FlavoursComponent implements OnInit {
   ngOnInit(): void {
     this.service.getSuppliers().subscribe(res => {
       res.forEach(item => {
-        this.supplierList.push(item['name'])
+        this.supplierList.push(item['name'])        
       })
     })
     

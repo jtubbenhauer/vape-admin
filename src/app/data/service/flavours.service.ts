@@ -7,26 +7,28 @@ import { Router } from "@angular/router";
 })
 export class FlavoursService {
 
+  user = JSON.parse(localStorage.getItem('user'));
+
   constructor(private afs: AngularFirestore, private router: Router) { }
 
   getSuppliers() {
-    return this.afs.collection('suppliers').valueChanges();
+    return this.afs.collection(this.user['uid']).doc('data').collection('suppliers').valueChanges();
   }
 
   getFlavours() {
-    return this.afs.collection('flavours').valueChanges({ idField: 'id' });
+    return this.afs.collection(this.user['uid']).doc('data').collection('flavours').valueChanges({ idField: 'id' });
   }
 
   getFlavourOptions() {
-    return this.afs.collection('flavours').snapshotChanges();
+    return this.afs.collection(this.user['uid']).doc('data').collection('flavours').snapshotChanges();
   }
 
   getFlavourFromID(id) {
-    return this.afs.collection('flavours').doc(id).valueChanges();
+    return this.afs.collection(this.user['uid']).doc('data').collection('flavours').doc(id).valueChanges();
   }
 
   addFlavour(data) {
-    return this.afs.collection('flavours').add({
+    return this.afs.collection(this.user['uid']).doc('data').collection('flavours').add({
       'supplier': data.supplier,
       'name': data.name,
       'cost': data.cost,
@@ -35,12 +37,12 @@ export class FlavoursService {
   }
 
   updateFlavour(id, data) {
-    this.afs.collection('flavours').doc(id).update(data);
+    this.afs.collection(this.user['uid']).doc('data').collection('flavours').doc(id).update(data);
     window.alert('Flavour updated');
   }
 
   deleteFlavour(id) {
-    this.afs.collection('flavours').doc(id).delete();
+    this.afs.collection(this.user['uid']).doc('data').collection('flavours').doc(id).delete();
     this.router.navigate(['admin/flavours']);
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/data/service/auth.service';
 import { SuppliersService } from "app/data/service/suppliers.service";
 
 @Component({
@@ -17,10 +18,13 @@ export class SuppliersListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private suppliersService: SuppliersService) { }
+  constructor(private suppliersService: SuppliersService, private auth: AuthService) {
+  }
 
   ngOnInit() {
-    return this.suppliersService.getSuppliers().subscribe(res => this.dataSource.data = res);
+      this.suppliersService.getSuppliers().subscribe(res => {
+        this.dataSource.data = res;
+      })
   }
 
   ngAfterViewInit(): void {

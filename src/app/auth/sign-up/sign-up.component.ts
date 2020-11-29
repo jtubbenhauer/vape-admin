@@ -18,9 +18,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SignUpComponent implements OnInit {
 
-  email: string;
-  password: string;
-
   emailField = new FormControl('', [
     Validators.required,
     Validators.email
@@ -34,9 +31,9 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signup() {
-    this.service.signup(this.email, this.password);
-    this.email = this.password = '';
+
+  registerButton() {
+    this.service.signup(this.emailField.value, this.passwordField.value);
   }
 
 }

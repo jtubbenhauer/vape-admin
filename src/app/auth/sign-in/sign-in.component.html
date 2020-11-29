@@ -7,15 +7,15 @@
                 </div>
                 <mat-form-field style="width: 250px">
                     <mat-label>Email Address</mat-label>
-                    <input matInput type="email" placeholder="name@example.com">
+                    <input matInput type="email" [formControl]="emailField" placeholder="name@example.com">
                 </mat-form-field>
                 <mat-form-field style="width: 250px">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password">
+                    <input matInput type="password" [formControl]="passwordField">
                 </mat-form-field>
                 <div class="row">
                     <a mat-raised-button color="primary" href="/register">Register</a>
-                    <button mat-raised-button color="primary">Sign In</button>
+                    <button mat-raised-button color="primary" (click)="submitHandler()">Sign In</button>
                 </div>
             </div>
         </mat-card>

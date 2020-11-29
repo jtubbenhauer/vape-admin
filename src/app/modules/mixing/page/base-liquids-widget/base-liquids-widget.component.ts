@@ -16,10 +16,10 @@ export class BaseLiquidsWidgetComponent implements OnInit {
   ngOnInit(): void {
 
     this.service.getVGStock().subscribe(res => {
-      this.vgStock = +(res['stock'] / 1000).toFixed(1)
+      this.vgStock = +res['stock'].toFixed(2)
     })
     this.service.getPGStock().subscribe(res => {
-      this.pgStock = +(res['stock'] / 1000).toFixed(1)
+      this.pgStock = +res['stock'].toFixed(2)
     })
   }
 

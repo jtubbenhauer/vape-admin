@@ -124,8 +124,8 @@ export class RtvComponent implements OnInit {
   }
 
   commitRTV() {
-    this.commitVG = this.tableDataConc[0].vg;
-    this.commitPG = this.tableDataConc[0].pg;
+    this.commitVG = this.tableDataConc[0].vg / 1000;    
+    this.commitPG = this.tableDataConc[0].pg / 1000;
 
     let vg_count = 0
     let pg_count = 0
@@ -148,8 +148,8 @@ export class RtvComponent implements OnInit {
   }
 
   commitDoubler() {
-    this.commitVG = this.tableDataDoubler[0].doublervg;
-    this.commitPG = this.tableDataDoubler[0].doublerpg;
+    this.commitVG = this.tableDataDoubler[0].doublervg / 1000;
+    this.commitPG = this.tableDataDoubler[0].doublerpg / 1000;
 
     let vg_count = 0
     let pg_count = 0
@@ -157,14 +157,14 @@ export class RtvComponent implements OnInit {
     this.service.getVGStock().subscribe(res => {
       this.totalVG = res['stock'] - this.commitVG;
       if (vg_count === 0) {
-        this.service.updateBaseStock('vg', +this.totalVG.toFixed(1));
+        this.service.updateBaseStock('vg', +this.totalVG.toFixed(2));
         vg_count++;
       }
     });
     this.service.getPGStock().subscribe(res => {
       this.totalPG = res['stock'] - this.commitPG;
       if (pg_count === 0) {
-        this.service.updateBaseStock('pg', +this.totalPG.toFixed(1));
+        this.service.updateBaseStock('pg', +this.totalPG.toFixed(2));
         pg_count++;
       }
     });

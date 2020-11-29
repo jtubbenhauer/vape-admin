@@ -1,0 +1,67 @@
+.wrapper {
+  display: grid;
+  gap: 10px;
+  grid-template-areas:
+  "form"
+  "table"
+  "table2"
+  "sidebar"
+  ;
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    grid-template-columns: 1fr 3fr 1fr 1fr;
+    grid-template-areas:
+    ". form sidebar ."
+    ". table1 sidebar ."
+    ". table2 sidebar ."
+    ;
+  }
+  
+}
+
+.form { grid-area: form; }
+.table1 { grid-area: table1; }
+.table2 { grid-area: table2; }
+.sidebar { grid-area: sidebar; }
+
+.form-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+  "recipe recipe ."
+  "finalsize nicvg nicstrength "
+  "targetvg targetnic calcbutton"
+  ;
+  gap: 15px;
+}
+@media (max-width: 500px) {
+  .form-wrapper {
+    display:grid;
+    gap: 10px;
+    grid-template-areas:
+    "recipe"
+    "finalsize"
+    "nicvg"
+    "nicstrength"
+    "targetvg"
+    "targetnic"
+    "calcbutton"
+    ;
+  }
+}
+
+
+
+.recipe { grid-area: recipe; }
+.finalsize { grid-area: finalsize; }
+.nicvg { grid-area: nicvg; }
+.nicstrength { grid-area: nicstrength; }
+.targetvg { grid-area: targetvg; }
+.targetnic { grid-area: targetnic; }
+.calcbutton {
+  grid-area: calcbutton;
+  justify-self: center;
+  align-self: center;
+}
