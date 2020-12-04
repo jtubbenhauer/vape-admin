@@ -157,14 +157,14 @@ export class RtvComponent implements OnInit {
     this.service.getVGStock().subscribe(res => {
       this.totalVG = res['stock'] - this.commitVG;
       if (vg_count === 0) {
-        this.service.updateBaseStock('vg', +this.totalVG.toFixed(2));
+        this.service.updateBaseStock('vg', +this.totalVG.toFixed(1));
         vg_count++;
       }
     });
     this.service.getPGStock().subscribe(res => {
       this.totalPG = res['stock'] - this.commitPG;
       if (pg_count === 0) {
-        this.service.updateBaseStock('pg', +this.totalPG.toFixed(2));
+        this.service.updateBaseStock('pg', +this.totalPG.toFixed(1));
         pg_count++;
       }
     });

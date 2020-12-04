@@ -32,7 +32,7 @@
           <input matInput [formControl]="targetnic">
         </mat-form-field>
         <div class="calcbutton">
-          <button mat-raised-button color="primary">Calculate</button>
+          <button mat-raised-button color="primary" (click)="calculateButton()">Calculate</button>
         </div>
       </div>
 
@@ -45,12 +45,78 @@
   </div>
   <div class="flex-container table1">
     <mat-card>
+      <div>
+        <h2>From Concentrate</h2>
+      </div>
+      <div class="table">
+        <table mat-table [dataSource]="dataSourceConc" matSort>
+  
+          <ng-container matColumnDef="concentrate">
+            <th mat-header-cell *matHeaderCellDef> Concentrate </th>
+            <td mat-cell *matCellDef="let element"> {{element.concentrate}} g </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="vg">
+            <th mat-header-cell *matHeaderCellDef> VG </th>
+            <td mat-cell *matCellDef="let element"> {{element.vg}} g </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="pg">
+            <th mat-header-cell *matHeaderCellDef> PG </th>
+            <td mat-cell *matCellDef="let element"> {{element.pg}} g </td>
+          </ng-container>
 
+          <ng-container matColumnDef="nic">
+            <th mat-header-cell *matHeaderCellDef> Nic </th>
+            <td mat-cell *matCellDef="let element"> {{element.nic}} g </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsConc"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsConc;"></tr>
+        </table>
+      </div>
+  
+      <div class="commit-button">
+        <button mat-raised-button color="primary" (click)="commitButton('Conc')">Commit</button>
+      </div>
     </mat-card>
   </div>
   <div class="flex-container table2">
     <mat-card>
+      <div>
+        <h2>From Doubler @ 60/40</h2>
+      </div>
+      <div class="table">
+        <table mat-table [dataSource]="dataSourceDoubler" matSort>
+        
+          <ng-container matColumnDef="doubler">
+            <th mat-header-cell *matHeaderCellDef> Doubler </th>
+            <td mat-cell *matCellDef="let element"> {{element.doubler}} g </td>
+          </ng-container>
       
+          <ng-container matColumnDef="doublervg">
+            <th mat-header-cell *matHeaderCellDef> VG </th>
+            <td mat-cell *matCellDef="let element"> {{element.vg}} g </td>
+          </ng-container>
+
+          <ng-container matColumnDef="doublerpg">
+            <th mat-header-cell *matHeaderCellDef> PG </th>
+            <td mat-cell *matCellDef="let element"> {{element.pg}} g </td>
+          </ng-container>
+
+          <ng-container matColumnDef="doublernic">
+            <th mat-header-cell *matHeaderCellDef> Nic </th>
+            <td mat-cell *matCellDef="let element"> {{element.nic}} g </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsDoubler"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsDoubler;"></tr>
+        </table>
+      </div>
+  
+      <div class="commit-button">
+        <button mat-raised-button color="primary" (click)="commitButton('Doubler')">Commit</button>
+      </div>
     </mat-card>
   </div>
 </div>

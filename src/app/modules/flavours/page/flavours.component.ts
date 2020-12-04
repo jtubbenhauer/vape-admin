@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog} from "@angular/material/dialog";
 import { AddFlavourDialogComponent } from "./add-flavour-dialog/add-flavour-dialog.component";
 import { FlavoursService } from "app/data/service/flavours.service";
+import { Papa } from "ngx-papaparse";
 
 export interface DialogData {
   supplierList: any;
@@ -23,8 +24,9 @@ export class FlavoursComponent implements OnInit {
   name: string;
   cost: number;
   stock: number;
+  csvOutput: string[] = []
 
-  constructor(private dialog: MatDialog, private service: FlavoursService) { }
+  constructor(private dialog: MatDialog, private service: FlavoursService, private papa: Papa) { }
 
   openAddFlavourDialog(): void {
     console.log(this.supplierList);
@@ -52,6 +54,18 @@ export class FlavoursComponent implements OnInit {
       })
     })
     
+  }
+
+  csvInputChange(fileInputEvent: any) {
+    let csvData = fileInputEvent.target.files[0];
+
+    this.papa.parse(csvData,{
+      header: true,
+      skipEmptyLines: true,
+      complete: (result) => {
+          this.service.addFromCSV(result.data);
+      }
+  });
   }
 
 }

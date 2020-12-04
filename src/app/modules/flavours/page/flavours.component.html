@@ -5,8 +5,15 @@
     <h1> Flavours </h1>
   </div>  
   <mat-card>
-    <div class="button-div">
+    <div>
       <button mat-raised-button color="primary" (click)="openAddFlavourDialog()">Add New Flavour</button>
+      <div style="float:right;">
+        <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".csv"/>
+        <button mat-raised-button color="primary" (click)="csvInput.click()">Bulk Import CSV</button>
+        <p><a class="template-link" href="https://drive.google.com/uc?export=download&id=1yhGNXZQf5tRsH7H2fHhjhGVbNDlAE51f">Download CSV Template</a></p>
+
+      </div>
+      
     </div>
     <div>
       <app-flavours-table></app-flavours-table>

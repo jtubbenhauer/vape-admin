@@ -81,8 +81,8 @@ export class DoublerComponent implements OnInit {
         this.totalPercentage += +i.percentage;
       });
       this.addConcentrate = this.service.calcConcentrate(this.size.value, this.totalPercentage) * 2;
-      this.addVG = +(((this.vgPercentage.value / 100) * this.size.value) * 1.261).toFixed(1);
-      this.addPG = +( (this.size.value - (this.addVG / 1.261) - this.addConcentrate) * 1.0361 ).toFixed(1);      
+      this.addVG = this.service.calcDoublerVG(this.size.value, this.vgPercentage.value);
+      this.addPG = this.service.calcDoublerPG(this.size.value, this.addVG, this.addConcentrate); 
       this.tableData.push({
         'concentrate': this.addConcentrate,
         'vg': this.addVG,
@@ -95,7 +95,25 @@ export class DoublerComponent implements OnInit {
   }
 
   commitButton() {
-    
+    let commitVG = this.tableData[0].vg / 1000;
+    let commitPG = this.tableData[0].pg / 1000;
+    let vgCount = 0;
+    let pgCount = 0;
+
+    this.service.getVGStock().subscribe(res => {
+      let totalVG = res['stock'] - commitVG;
+      if (vgCount === 0) {
+        this.service.updateBaseStock('vg', +totalVG.toFixed(1));
+        vgCount++;
+      }
+    });
+    this.service.getPGStock().subscribe(res => {
+      let totalPG = res['stock'] - commitPG;
+      if (pgCount === 0) {
+        this.service.updateBaseStock('pg', +totalPG.toFixed(1));
+        pgCount++;
+      }
+    });
   }
 
 }

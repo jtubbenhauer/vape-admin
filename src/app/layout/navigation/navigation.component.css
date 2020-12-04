@@ -11,7 +11,9 @@
 }
 
 
-
+.mat-divider {
+  border-top-color: rgb(119, 119, 119);
+}
 
 .spacer {
   flex: 1 1 auto;

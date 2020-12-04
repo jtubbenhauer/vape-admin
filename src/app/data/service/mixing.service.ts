@@ -42,6 +42,25 @@ export class MixingService {
   calcPG(size, addConc, addVG) {
     return +((size - (addVG / 1.261)-(addConc / 1.0361))*1.0361).toFixed(1);
   }
+
+  calcDoublerVG(size, vgPercentage) {
+    return +(((+vgPercentage / 100) * +size) * 1.261).toFixed(1);
+  }
+
+  calcDoubler(size, flavourPercentage) {
+    let conc = this.calcConcentrate(size, flavourPercentage);
+    let vg = this.calcDoublerVG(size / 2, 60);
+    let pg = this.calcDoublerPG(size / 2, vg, conc);
+    return {
+      'conc': +conc.toFixed(1),
+      'vg': +vg.toFixed(1),
+      'pg': +pg.toFixed(1)
+    }
+  }
+
+  calcDoublerPG(size, addVG, addConcentrate) {
+    return +((+size - (+addVG / 1.261) - +addConcentrate) * 1.0361).toFixed(1);
+  }
   
   getVGStock() {
     return this.afs.collection(this.uid).doc('data').collection('base').doc('vg').valueChanges();

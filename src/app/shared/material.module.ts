@@ -44,7 +44,6 @@ import { MatSliderModule } from '@angular/material/slider';
     MatAutocompleteModule,
     MatTabsModule,
     MatSliderModule
-  
   ],
   exports: [
     CommonModule,

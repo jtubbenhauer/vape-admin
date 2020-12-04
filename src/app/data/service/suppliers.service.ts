@@ -25,5 +25,7 @@ export class SuppliersService {
   deleteSupplier(id) {
     return this.afs.collection(this.user['uid']).doc('data').collection('suppliers').doc(id).delete();
   }
+
+  
 }
 
