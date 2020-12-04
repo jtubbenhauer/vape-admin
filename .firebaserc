@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "vape-admin"
+  },
+  "targets": {
+    "vape-admin": {
+      "hosting": {
+        "vape-admin": [
+          "vape-admin"
+        ]
+      }
+    }
+  }
+}
