@@ -28,3 +28,12 @@
 .sidebar {
   align-self: flex-start;
 }
+
+.flex-container-sidebar {
+  display:flex;
+  flex-direction: column;
+}
+
+.flex-container-sidebar .mat-card {
+  margin-bottom: 10px;
+}

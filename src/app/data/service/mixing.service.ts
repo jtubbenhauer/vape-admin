@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import firestore from "firebase/app";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class MixingService {
   }
 
   calcConcentrate(size, percentage) {
-    return +((size * (percentage / 100)) * 1.0361).toFixed(1);
+    return +((size * (percentage / 100))).toFixed(1);
   }
 
   calcVG(size, vgPercentage) {
@@ -40,7 +41,7 @@ export class MixingService {
   }
 
   calcPG(size, addConc, addVG) {
-    return +((size - (addVG / 1.261)-(addConc / 1.0361))*1.0361).toFixed(1);
+    return +((size - (addVG / 1.261)-addConc)*1.0361).toFixed(1);
   }
 
   calcDoublerVG(size, vgPercentage) {
@@ -72,6 +73,14 @@ export class MixingService {
 
   updateBaseStock(base, stock) {
     this.afs.collection(this.uid).doc('data').collection('base').doc(base).update({'stock': stock})
+  }
+
+  getRecipeByID(id) {
+    return this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).valueChanges();
+  }
+
+  updateConcentrate(id, num) {
+    this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).update({'concentrate': num})
   }
 }
 

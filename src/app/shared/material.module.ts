@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSelectModule,
     MatAutocompleteModule,
     MatTabsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatExpansionModule
   ],
   exports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSelectModule,
     MatAutocompleteModule,
     MatTabsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatExpansionModule
     
   ]
 })

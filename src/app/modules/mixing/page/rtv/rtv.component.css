@@ -15,7 +15,8 @@
     grid-template-areas:
       ". form sidebar ."
       ". table1 sidebar ."
-      ". table2 sidebar .";
+      ". table2 sidebar ."
+      ". . sidebar .";
   }
 }
 

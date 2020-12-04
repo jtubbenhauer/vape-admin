@@ -11,16 +11,13 @@
                 </mat-form-field>
                 <mat-form-field style="width: 250px">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" [formControl]="passwordField">
+                    <input matInput type="password" [formControl]="passwordField" (keyup.enter)="submitHandler()">
                 </mat-form-field>
                 <div class="row">
                     <a mat-raised-button color="primary" href="/register">Register</a>
                     <button mat-raised-button color="primary" (click)="submitHandler()">Sign In</button>
                 </div>
             </div>
-            <p>sales@nimbusvapour.com.au</p>
-            <p>nimbusvapour</p>
-            <p>test</p>
         </mat-card>
     </div>
 </div>

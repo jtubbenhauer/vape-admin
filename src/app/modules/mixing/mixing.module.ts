@@ -8,10 +8,11 @@ import { RtvComponent } from './page/rtv/rtv.component';
 import { DoublerComponent } from './page/doubler/doubler.component';
 import { BaseLiquidsWidgetComponent } from './page/base-liquids-widget/base-liquids-widget.component';
 import { QuickMixComponent } from './page/quick-mix/quick-mix.component';
+import { WeightsWidgetComponent } from './page/weights-widget/weights-widget.component';
 
 
 @NgModule({
-  declarations: [MixingComponent, ConcentrateComponent, RtvComponent, DoublerComponent, BaseLiquidsWidgetComponent, QuickMixComponent],
+  declarations: [MixingComponent, ConcentrateComponent, RtvComponent, DoublerComponent, BaseLiquidsWidgetComponent, QuickMixComponent, WeightsWidgetComponent],
   imports: [
     CommonModule,
     MixingRoutingModule,

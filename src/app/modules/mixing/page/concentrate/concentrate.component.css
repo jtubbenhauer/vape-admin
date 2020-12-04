@@ -12,12 +12,13 @@
     grid-template-columns: 1fr 3fr 1fr 1fr;
     grid-template-areas:
       ". form sidebar ."
-      ". table sidebar .";
+      ". table sidebar ."
+      ". . sidebar .";
   }
 }
 
 
 .form { grid-area: form; }
-.table { grid-area: table; }
-.sidebar { grid-area: sidebar; }
+.table { grid-area: table;}
+.sidebar { grid-area: sidebar;}
 

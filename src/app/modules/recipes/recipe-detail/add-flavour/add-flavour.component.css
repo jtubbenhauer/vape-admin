@@ -1,11 +1,6 @@
-.input-table {
-  width: 90%;
-}
-
-.mat-form-field {
-  width: 95%;
-}
-
-.flavour-td {
-  width: 70%;
+.mat-card-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }

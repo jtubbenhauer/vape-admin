@@ -30,9 +30,12 @@
 
     </mat-card>
   </div>
-  <div class="flex-container sidebar">
+  <div class="flex-container-sidebar sidebar">
     <mat-card>
       <app-base-liquids-widget></app-base-liquids-widget>
+    </mat-card>
+    <mat-card>
+      <app-weights-widget></app-weights-widget>
     </mat-card>
   </div>
   <div class="table1">
@@ -65,7 +68,7 @@
         </div>
     
         <div class="commit-button">
-          <button mat-raised-button color="primary" (click)="commitRTV()">Commit</button>
+          <button mat-raised-button color="primary" (click)="commitButton('Conc')">Commit</button>
         </div>
       </mat-card>
     </div>
@@ -86,12 +89,12 @@
         
             <ng-container matColumnDef="doublervg">
               <th mat-header-cell *matHeaderCellDef> VG </th>
-              <td mat-cell *matCellDef="let element"> {{element.doublervg}} g </td>
+              <td mat-cell *matCellDef="let element"> {{element.vg}} g </td>
             </ng-container>
 
             <ng-container matColumnDef="doublerpg">
               <th mat-header-cell *matHeaderCellDef> PG </th>
-              <td mat-cell *matCellDef="let element"> {{element.doublerpg}} g </td>
+              <td mat-cell *matCellDef="let element"> {{element.pg}} g </td>
             </ng-container>
           
             <tr mat-header-row *matHeaderRowDef="displayedColumnsDoubler"></tr>
@@ -100,7 +103,7 @@
         </div>
     
         <div class="commit-button">
-          <button mat-raised-button color="primary" (click)="commitDoubler()">Commit</button>
+          <button mat-raised-button color="primary" (click)="commitButton('Doubler')">Commit</button>
         </div>
       </mat-card>
     </div>

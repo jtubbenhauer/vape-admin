@@ -5,7 +5,8 @@
   <div class="recipe-info">
     <app-recipe-info
     [title]="title"
-    [collection]="collection"></app-recipe-info>
+    [collection]="collection"
+    [concentrate]="concentrate"></app-recipe-info>
   </div>
   <div>
     <app-add-flavour [id]="id"></app-add-flavour>
@@ -15,6 +16,6 @@
   </div>
   <div>
     <button mat-raised-button style="background-color: red; color: white;" (click)="deleteHandler()">Delete Recipe</button>
-    <a href="admin/recipes"><button style="float:right;" mat-raised-button color="primary">Save Recipe</button></a>
+    <button style="float:right;" mat-raised-button color="primary" (click)="saveButton()">Save Recipe</button>
   </div>
 </div>

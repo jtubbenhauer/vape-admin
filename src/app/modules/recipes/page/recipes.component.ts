@@ -12,17 +12,18 @@ export class RecipesComponent implements OnInit {
 
   name: string;
   collection: string;
+  concentrate: number = 0;
 
   constructor(public dialog: MatDialog, private service: RecipesService) { }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewRecipeDialogComponent, {
       width: '250px',
-      data: {name: this.name, collection: this.collection}
+      data: {name: this.name, collection: this.collection, concentrate: this.concentrate}
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      this.service.addRecipeAndRedirect(res.name, res.collection);
+      this.service.addRecipeAndRedirect(res.name, res.collection, res.concentrate);
     })
   }
 

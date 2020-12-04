@@ -110,28 +110,38 @@ export class ConcentrateComponent implements OnInit {
   };
 
   commitBatch() {
-
-    if(this.dataSource.data.length === 0) {
-      window.alert('Please choose a recipe')
-    } else {
-      this.dataSource.data.map(field => {
-
-        let counter: number = 0;
-  
-        this.service.getFlavourID(field['supplier'], field['name']).subscribe(res => {
-          res.map(i => {
-            this.flavourID = i.payload.doc.id;
-            this.newStock = field['on_hand'] - field['quantity'];
-            if(counter === 0) {
-              this.service.updateFlavourStock(this.flavourID, this.newStock);
-              counter++;
-            }
+    if (confirm('Are you sure?')) {
+      if(this.dataSource.data.length === 0) {
+        window.alert('Please choose a recipe')
+      } else {
+        let totalConc: number = 0;
+        this.dataSource.data.map(field => {
+          let counter: number = 0;
+          totalConc += field['quantity']
+          this.service.getFlavourID(field['supplier'], field['name']).subscribe(res => {
+            res.map(i => {
+              this.flavourID = i.payload.doc.id;
+              this.newStock = field['on_hand'] - field['quantity'];
+              if(counter === 0) {
+                this.service.updateFlavourStock(this.flavourID, this.newStock);
+                counter++;
+              };
+            });
           });
         });
-      })
-      window.alert('Batch committed')
+        let count = 0;
+        let newConc: number = 0;
+        this.service.getRecipeByID(this.recipeID).subscribe(res => {
+          if (count === 0) {
+            newConc = +res['concentrate'] + totalConc;
+            this.service.updateConcentrate(this.recipeID, newConc);    
+            count++;
+          };
+        });
+        
+        window.alert('Batch committed')
+      }
     }
-
   }
 
 

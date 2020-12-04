@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Recipes } from "../schema/recipes";
 import { map } from 'rxjs/operators';
 import { Router } from "@angular/router";
 
@@ -12,12 +11,17 @@ export class RecipesService {
   user = JSON.parse(localStorage.getItem('user'));
   uid = this.user.uid;
 
+  newConcentrate: number;
+  newName: string;
+  newCollection: string;
+  changed: boolean = false;
+
   constructor(private afs: AngularFirestore, private router: Router) { }
 
   getRecipes() {
     return this.afs.collection(this.uid).doc('data').collection('recipes').snapshotChanges().pipe(map(
       a => a.map(i => {
-        const data = i.payload.doc.data() as Recipes;
+        const data = i.payload.doc.data();
         const id = i.payload.doc.id;
         return { id, ...data };
       })
@@ -40,15 +44,15 @@ export class RecipesService {
     })
   }
 
-  addRecipeAndRedirect(name, collection) {
+  addRecipeAndRedirect(name, collection, concentrate) {
     if (!collection) {
       collection = '';
     }
     this.afs.collection(this.uid).doc('data').collection('recipes').add({
       'name': name,
-      'collection': collection
+      'collection': collection,
+      'concentrate': concentrate
     }).then(doc => {
-      console.log(doc);
       
       this.router.navigate(['admin/recipes/' + doc.id])
     })
@@ -56,6 +60,20 @@ export class RecipesService {
 
   deleteRecipe(id) {
     return this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).delete();
+  }
+
+  saveRecipe(id) {
+    if (this.changed) {
+      this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).update({
+        'name': this.newName,
+        'collection': this.newCollection,
+        'concentrate': this.newConcentrate
+      });
+      this.router.navigate(['admin/recipes/'])
+    } else {
+      this.router.navigate(['admin/recipes/'])
+    }
+    
   }
 
 }

@@ -28,6 +28,8 @@ export class RtvComponent implements OnInit {
 
   dataSourceConc = new MatTableDataSource();
   dataSourceDoubler = new MatTableDataSource();
+  tableDataConc = [];
+  tableDataDoubler = [];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -40,23 +42,6 @@ export class RtvComponent implements OnInit {
 
   recipeList: Recipe[] = [];
   filteredOptions: Observable<Recipe[]>;
-
-  //Calculate button stuff
-  totalPercentage: number;
-  addConcentrate: number;
-  addVG: number;
-  addPG: number;
-  addVGDoubler: number;
-  addPGDoubler: number;
-  doublerWeight: number;
-  tableDataConc = [];
-  tableDataDoubler = [];
-
-  //Commit vars
-  commitVG: number;
-  commitPG: number;
-  totalVG: number;
-  totalPG: number;
 
   constructor(private service: MixingService) { }
 
@@ -92,82 +77,104 @@ export class RtvComponent implements OnInit {
 
 
   calculateButton() {
-    this.totalPercentage = 0;
+    let totalPercentage = 0;
 
     this.tableDataConc = [];
     this.tableDataDoubler = [];
     
     this.service.getFlavoursFromID(this.recipe.value['id']).subscribe(res => {
       res.map(i => {
-        this.totalPercentage += +i.percentage
+        totalPercentage += +i.percentage
       });
-      this.addConcentrate = this.service.calcConcentrate(+this.size.value, +this.totalPercentage);
-      this.addVG = this.service.calcVG(+this.size.value, +this.vgPercentage.value);
-      this.addPG = this.service.calcPG(+this.size.value, this.addConcentrate, this.addVG);
+      let addConcentrate = this.service.calcConcentrate(+this.size.value, +totalPercentage);
+      let addVG = this.service.calcVG(+this.size.value, +this.vgPercentage.value);
+      let addPG = this.service.calcPG(+this.size.value, +addConcentrate, +addVG);
       this.tableDataConc.push({
-        'concentrate': this.addConcentrate,
-        'vg': this.addVG,
-        'pg': this.addPG,
+        'concentrate': +addConcentrate.toFixed(1),
+        'vg': +addVG.toFixed(1),
+        'pg': +addPG.toFixed(1),
       });
-      this.addVGDoubler = this.addVG / 1.75;
-      this.addPGDoubler = this.addPG / 1.6;
-      this.doublerWeight = (this.addConcentrate + this.addVG + this.addPG) - (this.addVGDoubler + this.addPGDoubler);
+      this.dataSourceConc.data = this.tableDataConc;
+
+      let doubler = this.service.calcDoubler(this.size.value, totalPercentage)
       this.tableDataDoubler.push({
-        'doubler': +this.doublerWeight.toFixed(1),
-        'doublervg': +this.addVGDoubler.toFixed(1),
-        'doublerpg': +this.addPGDoubler.toFixed(1)
+        'doubler': +(Object.values(doubler).reduce((a, b) => a + b, 0)).toFixed(1),
+        'vg': +(addVG - doubler.vg).toFixed(1),
+        'pg': +(addPG - doubler.pg).toFixed(1)
       });
 
-      this.dataSourceConc.data = this.tableDataConc;
       this.dataSourceDoubler.data = this.tableDataDoubler;
     })
   }
 
-  commitRTV() {
-    this.commitVG = this.tableDataConc[0].vg / 1000;    
-    this.commitPG = this.tableDataConc[0].pg / 1000;
-
-    let vg_count = 0
-    let pg_count = 0
+  commitButton(mixType) {
+    let tableData = (mixType === 'Conc') ? this.tableDataConc : this.tableDataDoubler;
+    let commitVG = +tableData[0].vg / 1000;
+    let commitPG = +tableData[0].pg / 1000;
+    let vgCount = 0;
+    let pgCount = 0;
 
     this.service.getVGStock().subscribe(res => {
-      this.totalVG = res['stock'] - this.commitVG;
-      if (vg_count === 0) {
-        this.service.updateBaseStock('vg', this.totalVG);
-        vg_count++;
+      let totalVG = +res['stock'] - +commitVG;
+      if (vgCount === 0) {
+        this.service.updateBaseStock('vg', +totalVG.toFixed(1));
+        vgCount++;
       }
     });
     this.service.getPGStock().subscribe(res => {
-      this.totalPG = res['stock'] - this.commitPG;
-      if (pg_count === 0) {
-        this.service.updateBaseStock('pg', this.totalPG);
-        pg_count++;
+      let totalPG = +res['stock'] - +commitPG;
+      if (pgCount === 0) {
+        this.service.updateBaseStock('pg', +totalPG.toFixed(1));
+        pgCount++;
       }
     });
+  }
+
+  // commitRTV() {
+  //   this.commitVG = tableDataConc[0].vg / 1000;    
+  //   this.commitPG = tableDataConc[0].pg / 1000;
+
+  //   let vg_count = 0
+  //   let pg_count = 0
+
+  //   this.service.getVGStock().subscribe(res => {
+  //     this.totalVG = res['stock'] - this.commitVG;
+  //     if (vg_count === 0) {
+  //       this.service.updateBaseStock('vg', this.totalVG);
+  //       vg_count++;
+  //     }
+  //   });
+  //   this.service.getPGStock().subscribe(res => {
+  //     this.totalPG = res['stock'] - this.commitPG;
+  //     if (pg_count === 0) {
+  //       this.service.updateBaseStock('pg', this.totalPG);
+  //       pg_count++;
+  //     }
+  //   });
     
-  }
+  // }
 
-  commitDoubler() {
-    this.commitVG = this.tableDataDoubler[0].doublervg / 1000;
-    this.commitPG = this.tableDataDoubler[0].doublerpg / 1000;
+  // commitDoubler() {
+  //   this.commitVG = this.tableDataDoubler[0].doublervg / 1000;
+  //   this.commitPG = this.tableDataDoubler[0].doublerpg / 1000;
 
-    let vg_count = 0
-    let pg_count = 0
+  //   let vg_count = 0
+  //   let pg_count = 0
 
-    this.service.getVGStock().subscribe(res => {
-      this.totalVG = res['stock'] - this.commitVG;
-      if (vg_count === 0) {
-        this.service.updateBaseStock('vg', +this.totalVG.toFixed(1));
-        vg_count++;
-      }
-    });
-    this.service.getPGStock().subscribe(res => {
-      this.totalPG = res['stock'] - this.commitPG;
-      if (pg_count === 0) {
-        this.service.updateBaseStock('pg', +this.totalPG.toFixed(1));
-        pg_count++;
-      }
-    });
-  }
+  //   this.service.getVGStock().subscribe(res => {
+  //     this.totalVG = res['stock'] - this.commitVG;
+  //     if (vg_count === 0) {
+  //       this.service.updateBaseStock('vg', +this.totalVG.toFixed(1));
+  //       vg_count++;
+  //     }
+  //   });
+  //   this.service.getPGStock().subscribe(res => {
+  //     this.totalPG = res['stock'] - this.commitPG;
+  //     if (pg_count === 0) {
+  //       this.service.updateBaseStock('pg', +this.totalPG.toFixed(1));
+  //       pg_count++;
+  //     }
+  //   });
+  // }
 
 }

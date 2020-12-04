@@ -3,33 +3,22 @@
     <mat-card-title>Add Flavour</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
-      <table class="input-table">
-        <tr>
-          <td class="flavour-td">
-            <mat-form-field>
-              <input type="text"
-                     placeholder="Search for flavour"
-                     matInput
-                     [formControl]="flavourNameSupplier"
-                     [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </td>
-          <td class="percentage-td">
-            <mat-form-field>
-              <input matInput placeholder="Flavour percentage" [formControl]="percentage">
-            </mat-form-field>
-          </td>
-          <td class="button-td">
-            <button mat-raised-button color="primary" (click)="formSubmit()">Add Flavour</button>
-          </td>
-        </tr>
-      </table>
-    </form>
+    <mat-form-field style="flex-basis: 40%;">
+      <input type="text"
+              placeholder="Search for flavour"
+              matInput
+              [formControl]="flavourNameSupplier"
+              [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field style="width: 150px;">
+      <input matInput placeholder="Flavour percentage" [formControl]="percentage">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="formSubmit()">Add Flavour</button>
   </mat-card-content>
 </mat-card>

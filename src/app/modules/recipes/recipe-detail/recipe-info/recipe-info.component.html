@@ -4,14 +4,20 @@
       <tr>
         <td>
           <mat-form-field>
-            <mat-label>Product name</mat-label>
-            <input matInput value={{title}}>
+            <mat-label>Recipe name</mat-label>
+            <input matInput value={{title}} [formControl]="newName" (keyup)="updateValue()">
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
             <mat-label>Collection</mat-label>
-            <input matInput value={{collection}}>
+            <input matInput value={{collection}} [formControl]="newCollection" (keyup)="updateValue()">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Concentrate On Hand (ml)</mat-label>
+            <input matInput value={{concentrate}} [formControl]="newConcentrate" (keyup)="updateValue()">
           </mat-form-field>
         </td>
       </tr>

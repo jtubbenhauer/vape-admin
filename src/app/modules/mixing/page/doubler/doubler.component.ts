@@ -84,9 +84,9 @@ export class DoublerComponent implements OnInit {
       this.addVG = this.service.calcDoublerVG(this.size.value, this.vgPercentage.value);
       this.addPG = this.service.calcDoublerPG(this.size.value, this.addVG, this.addConcentrate); 
       this.tableData.push({
-        'concentrate': this.addConcentrate,
-        'vg': this.addVG,
-        'pg': this.addPG
+        'concentrate': +this.addConcentrate,
+        'vg': +this.addVG,
+        'pg': +this.addPG
       });
 
       this.dataSource.data = this.tableData
@@ -114,6 +114,7 @@ export class DoublerComponent implements OnInit {
         pgCount++;
       }
     });
+    window.alert('Batch committed')
   }
 
 }

@@ -12,7 +12,7 @@ import { RecipesService } from 'app/data/service/recipes.service';
 })
 export class RecipeListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'collection', 'edit'];
+  displayedColumns: string[] = ['name', 'collection', 'concentrate', 'edit'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
