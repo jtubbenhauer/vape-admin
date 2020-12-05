@@ -11,7 +11,7 @@ import { FlavoursService } from "app/data/service/flavours.service";
 })
 export class FlavoursTableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['supplier', 'name', 'stock', 'cost', 'notes', 'edit'];
+  displayedColumns: string[] = ['supplier', 'name', 'stock', 'unit', 'cost', 'edit'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,6 +23,17 @@ export class FlavoursTableComponent implements OnInit, AfterViewInit {
     return this.service.getFlavours().subscribe(res => {
       res.map(i => {
         i['stock'] = +parseFloat(i['stock']).toFixed(1);
+        switch(i['unit']) {
+          case 'l':
+            i['unit'] = 'Litre';
+            break;
+          case 'oz':
+            i['unit'] = 'Ounce';
+            break;
+          case 'gal':
+            i['unit'] = 'Gallon';
+            break;
+        }
       });
       this.dataSource.data = res;
     });

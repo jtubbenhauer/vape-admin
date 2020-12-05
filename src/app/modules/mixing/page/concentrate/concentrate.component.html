@@ -38,7 +38,7 @@
         </ng-container>
       
         <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity (ml) </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity (mL) </th>
           <td style="font-weight: bold" [ngStyle]="{ 'color': element.quantity > element.on_hand ? 'red': 'black'}" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
         </ng-container>
     

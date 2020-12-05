@@ -33,7 +33,7 @@ export class RecipesService {
   }
 
   getIngredients(id) {
-    return this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).collection('flavours').valueChanges();
+    return this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).collection('flavours').snapshotChanges();
   }
 
   addIngredient(data) {
@@ -73,7 +73,10 @@ export class RecipesService {
     } else {
       this.router.navigate(['admin/recipes/'])
     }
-    
+  }
+
+  deleteFlavourFromRecipe(recipeID, flavourID) {
+    this.afs.doc(`${this.uid}/data/recipes/${recipeID}/flavours/${flavourID}`).delete();
   }
 
 }

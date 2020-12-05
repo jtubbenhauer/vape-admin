@@ -4,6 +4,12 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { RecipesService } from 'app/data/service/recipes.service';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+
+export interface Flavour {
+  name: string;
+  id: string;
+}
 
 @Component({
   selector: 'app-add-flavour',
@@ -14,10 +20,10 @@ export class AddFlavourComponent implements OnInit {
 
   @Input() id: string;
 
-  options: string[] = [];
-  flavourNameSupplier = new FormControl('');
+  flavourList: Flavour[] = [];
+  flavour = new FormControl();
   percentage = new FormControl('');
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<Flavour[]>;
   data = {};
 
   newSupplier: string;
@@ -28,19 +34,36 @@ export class AddFlavourComponent implements OnInit {
   ngOnInit(): void {
 
     this.flavoursService.getFlavours().subscribe(item => {
-      item.map(i => {
-        this.options.push(i['supplier'] + ' - ' + i['name']);
-        
-      })
+      item.map(i => {        
+        this.flavourList.push({
+          'name': i['supplier'] + ' - ' + i['name'],
+          'id': i['id']
+      });
+      });
+      this.filteredOptions = this.flavour.valueChanges.pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value: value.name),
+        map(name => name ? this._filter(name) : this.flavourList.slice())
+      )
     })
     
-    this.filteredOptions = this.flavourNameSupplier.valueChanges.pipe(
-      startWith(''),map(value => this._filter(value))
-    )
+    
+  };
+
+  displayFn(flavour: Flavour): string {
+    return flavour && flavour.name ? flavour.name : ''; 
+    
+  }
+
+  private _filter(name: string): Flavour[] {
+    const filterValue = name.toLowerCase();
+
+    return this.flavourList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   formSubmit() {
-    const splitArray = this.flavourNameSupplier.value.split(' - ');
+    
+    const splitArray = this.flavour.value['name'].split(' - ');
     this.data = {
       'supplier': splitArray[0],
       'name': splitArray[1],
@@ -51,10 +74,6 @@ export class AddFlavourComponent implements OnInit {
     
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue))
-  }
+  
 
 }

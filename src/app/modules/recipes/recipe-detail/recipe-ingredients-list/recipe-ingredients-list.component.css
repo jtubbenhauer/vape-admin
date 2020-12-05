@@ -9,3 +9,7 @@ th.mat-sort-header-sorted {
 .mat-tablle {
   width: 700px;
 }
+
+.fas {
+  cursor: pointer;
+}

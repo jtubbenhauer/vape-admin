@@ -32,13 +32,13 @@ export class FlavoursService {
       'supplier': data.supplier,
       'name': data.name,
       'cost': data.cost,
-      'stock': data.stock
+      'stock': data.stock,
+      'unit': data.unit
     })
   }
 
   updateFlavour(id, data) {
     this.afs.collection(this.user['uid']).doc('data').collection('flavours').doc(id).update(data);
-    window.alert('Flavour updated');
   }
 
   deleteFlavour(id) {

@@ -5,7 +5,7 @@
     </mat-card-title>
     <mat-card-content>
       <form [formGroup]="flavourForm">
-        <div class="row-container">
+        <div class="wrapper">
           <mat-form-field>
             <mat-label>Supplier</mat-label>
             <mat-select [(value)]="flavourData.supplier" formControlName="supplier">
@@ -18,28 +18,25 @@
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" required>
           </mat-form-field>
-        </div>
-        <div class="row-container">
           <mat-form-field>
-            <mat-label>Stock On Hand (ml)</mat-label>
+            <mat-label>Stock On Hand (mL)</mat-label>
             <input matInput formControlName="stock" required>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Cost (L)</mat-label>
             <input matInput formControlName="cost" required>
           </mat-form-field>
-        </div>
-        <div class="textarea-div" *ngIf="flavourForm.controls['notes']">
           <mat-form-field>
             <mat-label>Notes</mat-label>
             <textarea matInput formControlName="notes"></textarea>
           </mat-form-field>
-        </div>
   
-        <div class="button-container">
-          <button mat-raised-button color="primary" (click)="clickHandler()">Save</button>
-          <button mat-raised-button style="background-color: red; color: white;" (click)="deleteHandler()">Delete</button>
+          <div class="button-container">
+            <button mat-raised-button style="background-color: red; color: white; float: left;" (click)="deleteHandler()">Delete</button>
+            <button mat-raised-button style="float:right;" color="primary" (click)="clickHandler()">Save</button>
+          </div>
         </div>
+          
 
       </form>
 

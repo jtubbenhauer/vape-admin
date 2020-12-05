@@ -53,8 +53,7 @@ export class ConcentrateComponent implements OnInit {
         this.recipeList.push({
           name: i.payload.doc.data()['name'],
           id: i.payload.doc.id
-        }
-        )
+        });
       });
       this.filteredOptions = this.recipe.valueChanges
       .pipe(

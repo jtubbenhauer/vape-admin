@@ -7,17 +7,17 @@
       <input type="text"
               placeholder="Search for flavour"
               matInput
-              [formControl]="flavourNameSupplier"
+              [formControl]="flavour"
               [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
+          {{option.name}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field style="width: 150px;">
-      <input matInput placeholder="Flavour percentage" [formControl]="percentage">
+      <input matInput placeholder="Flavour percentage" [formControl]="percentage" (keyup.enter)="formSubmit()">
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="formSubmit()">Add Flavour</button>
   </mat-card-content>

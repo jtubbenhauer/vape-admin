@@ -10,6 +10,7 @@ export interface DialogData {
   name: string;
   cost: number;
   stock: number;
+  unit: string;
 }
 
 @Component({
@@ -22,8 +23,9 @@ export class FlavoursComponent implements OnInit {
   supplierList: any = [];
   supplier: string;
   name: string;
-  cost: number;
-  stock: number;
+  cost: number = 0;
+  stock: number = 0;
+  unit: string;
   csvOutput: string[] = []
 
   constructor(private dialog: MatDialog, private service: FlavoursService, private papa: Papa) { }
@@ -32,13 +34,14 @@ export class FlavoursComponent implements OnInit {
     console.log(this.supplierList);
     
     const addFlavourDialogRef = this.dialog.open(AddFlavourDialogComponent, {
-      width: '400px',
+      width: '500px',
       data: {
         supplierList: this.supplierList,
         supplier: this.supplier,
         name: this.name,
         cost: this.cost,
         stock: this.stock,
+        unit: this.unit
       }
     });
 

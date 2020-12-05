@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:15px;
+  margin: 30px;
+}
+
 .row-container {
   display: flex;
   justify-content: space-around;
@@ -33,6 +40,5 @@
 }
 
 .button-container {
-  display: flex;
-  justify-content: space-around;
+  grid-column: 1 / 3;
 }

@@ -13,8 +13,9 @@ import { RecipesService } from 'app/data/service/recipes.service';
 })
 export class RecipeIngredientsListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['supplier', 'name', 'percentage'];
+  displayedColumns: string[] = ['supplier', 'name', 'percentage', 'delete'];
   dataSource = new MatTableDataSource();
+  tableData = [];
 
   @Input() id: string;
 
@@ -30,8 +31,23 @@ export class RecipeIngredientsListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.service.getIngredients(this.id).subscribe(res => this.dataSource.data = res);
+    this.service.getIngredients(this.id).subscribe(res => {
+      res.map(i => {
+        this.tableData.push({
+          'supplier': i.payload.doc.data()['supplier'],
+          'name': i.payload.doc.data()['name'],
+          'percentage': i.payload.doc.data()['percentage'],
+          'id': i.payload.doc.id
+        })
+        this.dataSource.data = this.tableData;
+      });
+      this.tableData = []
+    });
     }
+
+  deleteHandler(id) {
+    this.service.deleteFlavourFromRecipe(this.id, id);
+  }
   
 
 }

@@ -1,44 +1,53 @@
 <h1 mat-dialog-title>Add Flavour</h1>
-<div mat-dialog-content>
 
-  <div *ngIf="data.supplierList.length > 0">
+<div class="wrapper" *ngIf="data.supplierList.length > 0">
 
-    <mat-form-field appearance="fill">
+  <div>
+    <mat-form-field>
       <mat-label>Supplier</mat-label>
-      <mat-select [(ngModel)]="data.supplier">
+      <mat-select required="true" [(ngModel)]="data.supplier">
         <mat-option *ngFor="let item of data.supplierList" [value]="item">
           {{item}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Flavour Name</mat-label>
-      <input matInput [(ngModel)]="data.name">
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Cost (Litre)</mat-label>
-      <input matInput [(ngModel)]="data.cost">
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Stock On Hand (ml)</mat-label>
-      <input matInput [(ngModel)]="data.stock">
-    </mat-form-field>
-      
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">Cancel</button>
-      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
-    </div>
-
+    <p tabindex="-1" style="font-size: 12px;"><a tabindex="-1" href="admin/suppliers" target="_blank">Add new supplier(s)</a></p>
   </div>
   
-  <div *ngIf="data.supplierList.length < 1">
-    <p style="color:red;">Suppliers must be added before flavours</p>
-    <a href="admin/suppliers"><button mat-raised-button color="primary">Add Suppliers</button></a>
+
+  <mat-form-field>
+    <mat-label>Flavour Name</mat-label>
+    <input matInput required="true" [(ngModel)]="data.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Unit</mat-label>
+    <mat-select required="true" [(ngModel)]="data.unit">
+      <mat-option value="l">Litre</mat-option>
+      <mat-option value="oz">Ounce</mat-option>
+      <mat-option value="gal">Gallon</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Cost Per Unit</mat-label>
+    <input matInput [(ngModel)]="data.cost">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Units In Stock</mat-label>
+    <input placeholder="Eg. '1.5'" matInput value="0" [(ngModel)]="data.stock">
+  </mat-form-field>
+    
+  <div mat-dialog-actions>
+    <button mat-button color="secondary" mat-raised-button (click)="onNoClick()">Cancel</button>
+    <button mat-button color="primary" mat-raised-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
   </div>
-
-
 
 </div>
+
+<div *ngIf="data.supplierList.length < 1">
+  <p style="color:red;">Suppliers must be added before flavours</p>
+  <a href="admin/suppliers"><button mat-raised-button color="primary">Add Suppliers</button></a>
+</div>
+

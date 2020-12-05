@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FlavoursService } from 'app/data/service/flavours.service';
 
 export class Flavour {
@@ -32,7 +32,7 @@ export class FlavoursDetailComponent implements OnInit {
     notes: new FormControl('')
   })
 
-  constructor(private route: ActivatedRoute, private service: FlavoursService) { }
+  constructor(private route: ActivatedRoute, private service: FlavoursService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -60,6 +60,7 @@ export class FlavoursDetailComponent implements OnInit {
 
   clickHandler() {
       this.service.updateFlavour(this.id, this.flavourForm.value);
+      this.router.navigate(['admin/flavours'])
   }
 
   deleteHandler() {
