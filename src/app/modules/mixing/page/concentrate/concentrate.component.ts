@@ -84,6 +84,8 @@ export class ConcentrateComponent implements OnInit {
     this.service.getFlavoursFromID(this.recipeID).subscribe(res => {
       res.map(i => {
         this.totalPercentage += +i.percentage
+        
+        
       });
       this.service.getFlavoursFromID(this.recipeID).subscribe(res => {
         res.map(i => {
@@ -99,7 +101,28 @@ export class ConcentrateComponent implements OnInit {
         this.recipeResult.map(recipe => {
           this.service.getStockOnHand(recipe).subscribe(res => {
             res.map(flavour => {
-              recipe.on_hand = +parseFloat(flavour['stock']).toFixed(1);
+              switch(flavour['unit']) {
+                case 'Millilitre':
+                  recipe.on_hand = +flavour['stock'].toFixed(1);
+                  recipe.unit = flavour['unit'];
+                  break;
+                case 'Litre':
+                  recipe.on_hand = +(flavour['stock'] * 1000).toFixed(1)
+                  recipe.unit = flavour['unit'];
+                  break;
+                case 'Ounce':
+                  recipe.on_hand = +(flavour['stock'] * 29.574).toFixed(1)
+                  recipe.unit = flavour['unit'];
+                  break;
+                case '16 Ounce':
+                  recipe.on_hand = +(flavour['stock'] * 473.184).toFixed(1)
+                  recipe.unit = flavour['unit'];
+                  break;
+                case 'Gallon':
+                  recipe.on_hand = +(flavour['stock'] * 3785.4).toFixed(1)
+                  recipe.unit = flavour['unit'];
+                  break;
+              }
             })
           })
         });
@@ -122,7 +145,7 @@ export class ConcentrateComponent implements OnInit {
               this.flavourID = i.payload.doc.id;
               this.newStock = field['on_hand'] - field['quantity'];
               if(counter === 0) {
-                this.service.updateFlavourStock(this.flavourID, this.newStock);
+                this.service.updateFlavourStock(this.flavourID, this.newStock, field['unit']);
                 counter++;
               };
             });
@@ -138,7 +161,6 @@ export class ConcentrateComponent implements OnInit {
           };
         });
         
-        window.alert('Batch committed')
       }
     }
   }

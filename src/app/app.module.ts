@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 
 import { NavigationComponent } from './layout/navigation/navigation.component';
-import { FooterComponent } from './layout/footer/footer.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -24,7 +23,6 @@ import { VerifyEmailComponent } from './auth/verify-email/verify-email.component
   declarations: [
     AppComponent,
     NavigationComponent,
-    FooterComponent,
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,

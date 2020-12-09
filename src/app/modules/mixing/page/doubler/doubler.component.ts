@@ -114,7 +114,6 @@ export class DoublerComponent implements OnInit {
         pgCount++;
       }
     });
-    window.alert('Batch committed')
   }
 
 }

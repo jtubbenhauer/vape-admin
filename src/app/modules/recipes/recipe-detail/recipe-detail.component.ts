@@ -14,6 +14,7 @@ export class RecipeDetailComponent implements OnInit {
   title: string;
   collection: string;
   concentrate: number;
+  unit: string;
   id: string;
 
   constructor(private service: RecipesService, private route: ActivatedRoute, private router: Router) { }
@@ -24,6 +25,7 @@ export class RecipeDetailComponent implements OnInit {
       this.title = res.data().name;
       this.collection = res.data().collection;
       this.concentrate = res.data().concentrate;
+      this.unit = res.data().unit;
     })
   }
 

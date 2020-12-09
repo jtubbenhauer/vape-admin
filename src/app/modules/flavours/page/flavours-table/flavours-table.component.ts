@@ -24,11 +24,17 @@ export class FlavoursTableComponent implements OnInit, AfterViewInit {
       res.map(i => {
         i['stock'] = +parseFloat(i['stock']).toFixed(1);
         switch(i['unit']) {
+          case 'ml':
+            i['unit'] = 'Millilitre';
+            break;
           case 'l':
             i['unit'] = 'Litre';
-            break;
+          break;
           case 'oz':
-            i['unit'] = 'Ounce';
+           i['unit'] = 'Ounce';
+          break;
+          case '16oz':
+            i['unit'] = '16 Ounce';
             break;
           case 'gal':
             i['unit'] = 'Gallon';

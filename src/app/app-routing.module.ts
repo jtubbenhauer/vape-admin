@@ -46,6 +46,11 @@ const routes: Routes = [
       path: 'mixing',
       loadChildren: () =>
         import('@modules/mixing/mixing.module').then(m => m.MixingModule)
+    },
+    {
+      path: 'invoices',
+      loadChildren: () =>
+        import('@modules/invoices/invoices.module').then(m => m.InvoicesModule)
     }
   ]
 }]

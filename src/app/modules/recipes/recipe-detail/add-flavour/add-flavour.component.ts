@@ -9,6 +9,7 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 export interface Flavour {
   name: string;
   id: string;
+  unit: string;
 }
 
 @Component({
@@ -37,6 +38,7 @@ export class AddFlavourComponent implements OnInit {
       item.map(i => {        
         this.flavourList.push({
           'name': i['supplier'] + ' - ' + i['name'],
+          'unit': i['unit'],
           'id': i['id']
       });
       });

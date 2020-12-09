@@ -85,6 +85,8 @@ export class RtvComponent implements OnInit {
     this.service.getFlavoursFromID(this.recipe.value['id']).subscribe(res => {
       res.map(i => {
         totalPercentage += +i.percentage
+        console.log(i);
+        
       });
       let addConcentrate = this.service.calcConcentrate(+this.size.value, +totalPercentage);
       let addVG = this.service.calcVG(+this.size.value, +this.vgPercentage.value);
@@ -113,7 +115,11 @@ export class RtvComponent implements OnInit {
     let commitPG = +tableData[0].pg / 1000;
     let vgCount = 0;
     let pgCount = 0;
+    
+    if(tableData[0].concentrate) {
 
+    }
+    
     this.service.getVGStock().subscribe(res => {
       let totalVG = +res['stock'] - +commitVG;
       if (vgCount === 0) {
@@ -129,52 +135,5 @@ export class RtvComponent implements OnInit {
       }
     });
   }
-
-  // commitRTV() {
-  //   this.commitVG = tableDataConc[0].vg / 1000;    
-  //   this.commitPG = tableDataConc[0].pg / 1000;
-
-  //   let vg_count = 0
-  //   let pg_count = 0
-
-  //   this.service.getVGStock().subscribe(res => {
-  //     this.totalVG = res['stock'] - this.commitVG;
-  //     if (vg_count === 0) {
-  //       this.service.updateBaseStock('vg', this.totalVG);
-  //       vg_count++;
-  //     }
-  //   });
-  //   this.service.getPGStock().subscribe(res => {
-  //     this.totalPG = res['stock'] - this.commitPG;
-  //     if (pg_count === 0) {
-  //       this.service.updateBaseStock('pg', this.totalPG);
-  //       pg_count++;
-  //     }
-  //   });
-    
-  // }
-
-  // commitDoubler() {
-  //   this.commitVG = this.tableDataDoubler[0].doublervg / 1000;
-  //   this.commitPG = this.tableDataDoubler[0].doublerpg / 1000;
-
-  //   let vg_count = 0
-  //   let pg_count = 0
-
-  //   this.service.getVGStock().subscribe(res => {
-  //     this.totalVG = res['stock'] - this.commitVG;
-  //     if (vg_count === 0) {
-  //       this.service.updateBaseStock('vg', +this.totalVG.toFixed(1));
-  //       vg_count++;
-  //     }
-  //   });
-  //   this.service.getPGStock().subscribe(res => {
-  //     this.totalPG = res['stock'] - this.commitPG;
-  //     if (pg_count === 0) {
-  //       this.service.updateBaseStock('pg', +this.totalPG.toFixed(1));
-  //       pg_count++;
-  //     }
-  //   });
-  // }
 
 }

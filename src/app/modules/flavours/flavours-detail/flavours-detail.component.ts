@@ -8,6 +8,7 @@ export class Flavour {
   supplier: string;
   stock: number;
   cost: number;
+  unit: string;
   notes: string;
 }
 
@@ -29,14 +30,21 @@ export class FlavoursDetailComponent implements OnInit {
     supplier: new FormControl(),
     stock: new FormControl(),
     cost: new FormControl(),
+    unit: new FormControl(),
     notes: new FormControl('')
-  })
+  });
+
+  unitList: string[] = [
+    'Millilitre', 'Litre', 'Ounce', '16 Ounce', 'Gallon'
+  ]
 
   constructor(private route: ActivatedRoute, private service: FlavoursService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.initData();
+    
+
   }
 
   initData() {
@@ -47,14 +55,20 @@ export class FlavoursDetailComponent implements OnInit {
       })
     })
 
+
     this.service.getFlavourFromID(this.id).subscribe(res => {
       this.flavourData.supplier = res['supplier'];
       this.flavourData.name = res['name'];
+      this.flavourData.unit = res['unit'];
       this.flavourData.stock = +parseFloat(res['stock']).toFixed(1);
       this.flavourData.cost = +parseFloat(res['cost']).toFixed(1);
       res['notes'] ? this.flavourData.notes = res['notes'] : this.flavourData.notes = 'None';
       this.flavourForm.setValue(this.flavourData)
+
     });
+
+
+    
     
   }
 

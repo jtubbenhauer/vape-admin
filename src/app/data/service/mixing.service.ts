@@ -28,8 +28,26 @@ export class MixingService {
     return this.afs.collection(this.uid).doc('data').collection('flavours', ref => ref.where('supplier', '==', supplier).where('name', '==', name)).snapshotChanges();
   }
 
-  updateFlavourStock(id, newStock) {
-    this.afs.collection(this.uid).doc('data').collection('flavours').doc(id).update({'stock': newStock})
+  updateFlavourStock(id, newStock, unit) {
+    let num: number = 0;
+    switch(unit) {
+      case 'Millilitre':
+        num = +newStock.toFixed(1);
+        break;
+      case 'Litre':
+        num = +(newStock / 1000).toFixed(1);
+        break;
+      case 'Ounce':
+        num = +(newStock / 29.574).toFixed(1);
+        break;
+      case '16 Ounce':
+        num = +(newStock / 473.184).toFixed(1);
+        break;
+      case 'Gallon':
+        num = +(newStock / 3785.4).toFixed(1);
+        break;
+    }
+    this.afs.collection(this.uid).doc('data').collection('flavours').doc(id).update({'stock': num})
   }
 
   calcConcentrate(size, percentage) {

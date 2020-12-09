@@ -14,7 +14,8 @@ export class RecipeInfoComponent implements OnInit, OnChanges {
   @Input() title: string;
   @Input() collection: string;
   @Input() concentrate: string;
-
+  @Input() unit: string;
+  
   
   newConcentrate = new FormControl();
   newName = new FormControl();
