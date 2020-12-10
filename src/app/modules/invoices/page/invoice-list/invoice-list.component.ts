@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class InvoiceListComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['invoice', 'supplier', 'date']
+  displayedColumns: string[] = ['invoice', 'supplier', 'date', 'status']
   data: any[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
