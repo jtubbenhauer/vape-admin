@@ -27,6 +27,10 @@ export class FlavoursService {
     return this.afs.collection(this.user['uid']).doc('data').collection('flavours').doc(id).valueChanges();
   }
 
+  getFlavoursFromSupplier(supplier) {
+    return this.afs.collection(`${this.user['uid']}/data/flavours`, ref => ref.where('supplier', '==', supplier));
+  }
+
   addFlavour(data) {
     return this.afs.collection(this.user['uid']).doc('data').collection('flavours').add({
       'supplier': data.supplier,

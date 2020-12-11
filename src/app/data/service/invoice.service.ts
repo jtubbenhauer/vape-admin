@@ -17,6 +17,10 @@ export class InvoiceService {
   }
 
   initInvoiceCount() {
-    this.afs.doc(`${this.uid}/data/invoicenum/id`).set({count: 1})
+    this.afs.doc(`${this.uid}/data/invoicenum/id`).set({count: 0})
+  }
+
+  incrementInvoiceCount() {
+    
   }
 }

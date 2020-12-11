@@ -3,5 +3,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.mat-card, .save-button-div {
+    margin-top: 15px;
+    width: 800px;
+}
+
+h3 {
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.right-button {
+    float: right;
+}
+
+.flavour-search {
+    width: 350px;
 }

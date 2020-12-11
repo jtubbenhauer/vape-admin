@@ -19,7 +19,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @NgModule({
@@ -45,7 +48,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatAutocompleteModule,
     MatTabsModule,
     MatSliderModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     CommonModule,
@@ -68,8 +73,13 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatAutocompleteModule,
     MatTabsModule,
     MatSliderModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-AU'}
   ]
 })
 export class MaterialModule { }
