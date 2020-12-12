@@ -27,4 +27,13 @@ h3 {
 
 .flavour-search {
     width: 350px;
+    margin-right: 30px;
+}
+
+.table-input {
+    width: 70px;
+}
+
+.form-select {
+    width: 100px;
 }
