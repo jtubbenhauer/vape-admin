@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { InvoiceService } from 'app/data/service/invoice.service';
 
 @Component({
   selector: 'app-invoice-list',
@@ -12,21 +13,26 @@ export class InvoiceListComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['invoice', 'supplier', 'date', 'status']
-  data: any[];
+  tableData: any[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(private service: InvoiceService) { }
 
   ngOnInit(): void {
-    this.data = [{
-      invoice: 'Cat',
-      supplier: 'dog',
-      date: 'cawk'
-    }];
+    this.service.getInvoices().snapshotChanges().subscribe(res => {
+      res.map(i => {
+        this.tableData.push({
+          'invoice': i.payload.doc.id,
+          'supplier': i.payload.doc.data()['supplier'],
+          'date': i.payload.doc.data()['date'],
+          'status': i.payload.doc.data()['status']
+        })
+        this.dataSource.data = this.tableData
+      })
+    })
 
-    this.dataSource.data = this.data
   }
 
   ngAfterViewInit() {

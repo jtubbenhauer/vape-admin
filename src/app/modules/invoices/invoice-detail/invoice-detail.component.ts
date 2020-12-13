@@ -41,7 +41,7 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
   date = new FormControl(new Date())
   addProduct = new FormControl('')
 
-  constructor(private route: ActivatedRoute, private service: InvoiceService, private flavourService: FlavoursService) { }
+  constructor(private route: ActivatedRoute, private service: InvoiceService, private flavourService: FlavoursService, private router: Router) { }
 
 
   ngAfterViewInit() {
@@ -76,7 +76,24 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.invoicenum.setValue(id);
+      this.getInvoiceDetails(id);
+      this.getInvoiceItems(id)
     }
+  }
+
+  getInvoiceDetails(id: string) {
+    this.service.getInvoice(id).valueChanges().subscribe(res => {
+      this.supplier.setValue(res['supplier']);
+      this.date.setValue(res['date'].toDate());
+    })
+  }
+
+  getInvoiceItems(id: string) {
+    this.service.getInvoiceItems(id).snapshotChanges().subscribe(res => {
+      res.map(i => {
+        console.log(i.payload.doc.id)
+      })
+    })
   }
 
   getSuppliers() {
@@ -118,8 +135,21 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
     });
   }
 
-  formFieldChange() {
-    console.log(this.dataSource.data);
-    
+  saveInvoiceButton() {
+    if (this.id === 'new') {
+      let invoiceDetails = {
+        'invoice': this.invoicenum.value,
+        'supplier': this.supplier.value,
+        'date': this.date.value,
+        'status': 'Open'
+      }
+      this.service.saveNewInvoice(invoiceDetails, this.dataSource.data)
+      this.service.incrementInvoiceCount();
+      this.router.navigate(['admin/invoices']);
+      }  
+    }
+
+
+
   }
-}
+    
