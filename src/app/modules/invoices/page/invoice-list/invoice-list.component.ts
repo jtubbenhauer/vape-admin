@@ -21,8 +21,13 @@ export class InvoiceListComponent implements OnInit, AfterViewInit {
   constructor(private service: InvoiceService) { }
 
   ngOnInit(): void {
+    this.tableData = [];
+    this.getInvoices();
+  }
+
+  getInvoices() {
     this.service.getInvoices().snapshotChanges().subscribe(res => {
-      res.map(i => {
+      res.map(i => {        
         this.tableData.push({
           'invoice': i.payload.doc.id,
           'supplier': i.payload.doc.data()['supplier'],
@@ -32,7 +37,6 @@ export class InvoiceListComponent implements OnInit, AfterViewInit {
         this.dataSource.data = this.tableData
       })
     })
-
   }
 
   ngAfterViewInit() {

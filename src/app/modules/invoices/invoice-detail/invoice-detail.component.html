@@ -2,7 +2,7 @@
     <mat-card>
         <h3>Order Details</h3>
         <div class="wrapper">
-            <mat-form-field>
+            <mat-form-field *ngIf="supplier">
                 <mat-label>Supplier</mat-label>
                     <mat-select [formControl]="supplier" (selectionChange)="supplierChange($event.value)">
                         <mat-option *ngFor="let item of suppliers" [value]="item">
@@ -14,7 +14,7 @@
                 <mat-label>Invoice #</mat-label>
                 <input matInput [formControl]="invoicenum">
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field *ngIf="date">
                 <mat-label>Invoice Date</mat-label>
                 <input matInput [matDatepicker]="picker" [formControl]="date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { firebase } from '@firebase/app'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class InvoiceService {
   user = JSON.parse(localStorage.getItem('user'));
   uid = this.user['uid'];
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private router: Router) { }
 
   getInvoiceNo() {
     return this.afs.doc(`${this.uid}/data/invoicenum/id`).valueChanges();
@@ -43,6 +43,12 @@ export class InvoiceService {
     })
   }
 
+  saveInvoice(invoiceDetails, data) {
+    this.afs.doc(`${this.uid}/data/invoices/${invoiceDetails.invoice}`).delete().then(() => {
+      this.saveNewInvoice(invoiceDetails, data);      
+    });
+  }
+
   saveNewInvoice(invoiceDetails, data) {
     this.afs.doc(`${this.uid}/data/invoices/${invoiceDetails.invoice}`).set({
       date: invoiceDetails.date,
@@ -54,11 +60,12 @@ export class InvoiceService {
           product: i.product,
           cost: i.cost,
           qty: i.qty,
-          total: i.total
+          total: i.total,
+          unit: i.unit
         })
-      })
-    })
+      });
+      this.router.navigate(['admin/invoices'])
 
-    
+    });
   }
 }

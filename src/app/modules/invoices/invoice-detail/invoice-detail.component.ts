@@ -41,18 +41,17 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
   date = new FormControl(new Date())
   addProduct = new FormControl('')
 
-  constructor(private route: ActivatedRoute, private service: InvoiceService, private flavourService: FlavoursService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private service: InvoiceService, private flavourService: FlavoursService) { }
 
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-
     this.initInvoiceNum(this.id);
-
     this.getSuppliers();
   };
 
@@ -77,22 +76,38 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
     } else {
       this.invoicenum.setValue(id);
       this.getInvoiceDetails(id);
-      this.getInvoiceItems(id)
+      this.getInvoiceItems(id);
     }
   }
 
   getInvoiceDetails(id: string) {
-    this.service.getInvoice(id).valueChanges().subscribe(res => {
-      this.supplier.setValue(res['supplier']);
+    
+    this.service.getInvoice(id).valueChanges().subscribe(res => { 
+      
       this.date.setValue(res['date'].toDate());
-    })
+      this.supplier.setValue(res['supplier']);
+
+      this.supplierChange(res['supplier']);
+    
+    });
   }
 
   getInvoiceItems(id: string) {
+    let invoiceItems: any[] = [];
     this.service.getInvoiceItems(id).snapshotChanges().subscribe(res => {
       res.map(i => {
-        console.log(i.payload.doc.id)
-      })
+        let data = i.payload.doc.data();
+        
+        invoiceItems.push({
+          'id': i.payload.doc.id,
+          'product': data['product'],
+          'qty': data['qty'],
+          'cost': data['cost'],
+          'total': data['total'],
+          'unit': data['unit']
+        })
+      });
+      this.dataSource.data = invoiceItems;
     })
   }
 
@@ -123,19 +138,22 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
 
   addProductHandler() {
     this.flavourService.getFlavourFromID(this.addProduct.value.id).subscribe(res => {
-      this.productList.push({
+      let newProduct = {
         'product': res['name'],
         'unit': res['unit'],
         'cost': res['cost'],
         'qty': 0,
         'total': '0',
         'id': this.addProduct.value.id
-      })
-      this.dataSource.data = this.productList;
+      }
+      let data = this.dataSource.data;
+      data.push(newProduct);
+      this.dataSource.data = data;
     });
   }
 
   saveInvoiceButton() {
+    
     if (this.id === 'new') {
       let invoiceDetails = {
         'invoice': this.invoicenum.value,
@@ -143,11 +161,20 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
         'date': this.date.value,
         'status': 'Open'
       }
-      this.service.saveNewInvoice(invoiceDetails, this.dataSource.data)
       this.service.incrementInvoiceCount();
-      this.router.navigate(['admin/invoices']);
+      this.service.saveNewInvoice(invoiceDetails, this.dataSource.data);
+      } else {
+        
+        let invoiceDetails = {
+          'invoice': this.invoicenum.value,
+          'supplier': this.supplier.value,
+          'date': this.date.value,
+          'status': 'Open'
+        }
+        
+        this.service.saveInvoice(invoiceDetails, this.dataSource.data)
       }  
-    }
+    } 
 
 
 

@@ -6,10 +6,12 @@ import { InvoicesComponent } from './page/invoices.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { InvoiceListComponent } from './page/invoice-list/invoice-list.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
+import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
+import { InvoiceNewComponent } from './invoice-new/invoice-new.component';
 
 
 @NgModule({
-  declarations: [InvoicesComponent, InvoiceListComponent, InvoiceDetailComponent],
+  declarations: [InvoicesComponent, InvoiceListComponent, InvoiceDetailComponent, InvoiceEditComponent, InvoiceNewComponent],
   imports: [
     CommonModule,
     InvoicesRoutingModule,
