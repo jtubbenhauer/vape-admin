@@ -172,7 +172,7 @@ export class InvoiceDetailComponent implements OnInit, AfterViewInit {
           'status': 'Open'
         }
         
-        this.service.saveInvoice(invoiceDetails, this.dataSource.data)
+        // this.service.saveInvoice(invoiceDetails, this.dataSource.data)
       }  
     } 
 

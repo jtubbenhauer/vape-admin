@@ -43,10 +43,38 @@ export class InvoiceService {
     })
   }
 
-  saveInvoice(invoiceDetails, data) {
-    this.afs.doc(`${this.uid}/data/invoices/${invoiceDetails.invoice}`).delete().then(() => {
-      this.saveNewInvoice(invoiceDetails, data);      
+
+  updateInvoice(invoiceNum, items) {
+    items.map(i => {
+      this.afs.doc(`${this.uid}/data/invoices/${invoiceNum}/items/${i.id}`).set({
+        product: i.product,
+          cost: i.cost,
+          qty: i.qty,
+          total: i.total,
+          unit: i.unit
+      }).then(() => {
+        // this.router.navigate(['admin/invoices'])    
+      })
     });
+  }
+
+  saveExistingInvoice(invoiceNum, invoiceDetails, items) {
+    this.afs.doc(`${this.uid}/data/invoices/${invoiceNum}`).set({
+      date: invoiceDetails.date,
+      supplier: invoiceDetails.supplier,
+      status: invoiceDetails.status
+    }).then(() => {
+      items.map(i => {
+        this.afs.doc(`${this.uid}/data/invoices/${invoiceNum}/items/${i.id}`).set({
+          product: i.product,
+          cost: i.cost,
+          qty: i.qty,
+          total: i.total,
+          unit: i.unit
+        })
+      });
+      this.router.navigate(['admin/invoices'])
+    })
   }
 
   saveNewInvoice(invoiceDetails, data) {

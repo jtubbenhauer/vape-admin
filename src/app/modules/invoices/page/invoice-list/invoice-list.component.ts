@@ -21,11 +21,11 @@ export class InvoiceListComponent implements OnInit, AfterViewInit {
   constructor(private service: InvoiceService) { }
 
   ngOnInit(): void {
-    this.tableData = [];
     this.getInvoices();
   }
 
   getInvoices() {
+
     this.service.getInvoices().snapshotChanges().subscribe(res => {
       res.map(i => {        
         this.tableData.push({
@@ -33,13 +33,18 @@ export class InvoiceListComponent implements OnInit, AfterViewInit {
           'supplier': i.payload.doc.data()['supplier'],
           'date': i.payload.doc.data()['date'],
           'status': i.payload.doc.data()['status']
-        })
-        this.dataSource.data = this.tableData
-      })
+        });
+        
+      });
+      
+      let uniqueData = this.tableData.filter((v,i,a)=>a.findIndex(t=>(t.invoice === v.invoice))===i);     
+      
+      this.dataSource.data = uniqueData;
     })
   }
 
   ngAfterViewInit() {
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
