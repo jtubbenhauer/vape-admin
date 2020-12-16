@@ -17,6 +17,7 @@ export class InvoiceNewComponent implements OnInit, AfterViewInit {
   supplierOptions: string[] = [];
   filteredOptions: Observable<any[]>;
   flavourList:any [] = [];
+  flavours: any[] = [];
 
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
@@ -54,10 +55,9 @@ export class InvoiceNewComponent implements OnInit, AfterViewInit {
   }
 
   supplierChange(value) {
-    let flavours = new Array();
     this.flavourService.getFlavoursFromSupplier(value).snapshotChanges().subscribe(res => {
       res.map(i => {
-        flavours.push({
+        this.flavours.push({
           'name': i.payload.doc.data()['name'],
           'id': i.payload.doc.id
         })
@@ -65,14 +65,14 @@ export class InvoiceNewComponent implements OnInit, AfterViewInit {
       this.filteredOptions = this.addProduct.valueChanges.pipe(
             startWith(''),
             map(value => typeof value === 'string' ? value: value.name),
-            map(name => name ? this._filter(name) : flavours.slice())
+            map(name => name ? this._filter(name) : this.flavours.slice())
           )
     })
   };
 
   private _filter(name: string): any[] {
     const filterValue = name.toLowerCase();
-    return this.flavourList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.flavours.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   displayFn(flavour): string {
@@ -87,7 +87,8 @@ export class InvoiceNewComponent implements OnInit, AfterViewInit {
         'cost': res['cost'],
         'qty': 0,
         'total': '0',
-        'id': this.addProduct.value.id
+        'id': this.addProduct.value.id,
+        'received': 0
       }
       let data = this.dataSource.data;
       data.push(newProduct);

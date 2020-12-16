@@ -54,13 +54,14 @@ export class ConcentrateComponent implements OnInit {
           name: i.payload.doc.data()['name'],
           id: i.payload.doc.id
         });
-      });
+      });      
       this.filteredOptions = this.recipe.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.name),
         map(name => name ? this._filter(name) : this.recipeList.slice())
       );
+
     })
   }
 
@@ -71,7 +72,6 @@ export class ConcentrateComponent implements OnInit {
   
   private _filter(name: string): Recipe[] {
     const filterValue = name.toLowerCase();
-
     return this.recipeList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 

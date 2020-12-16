@@ -48,6 +48,7 @@ export class MixingService {
         break;
     }
     this.afs.collection(this.uid).doc('data').collection('flavours').doc(id).update({'stock': num})
+    this.afs.collection(this.uid).doc('data').collection('flavours').doc(id).update({'stockml': newStock})
   }
 
   calcConcentrate(size, percentage) {

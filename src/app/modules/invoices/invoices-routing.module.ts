@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { InvoiceNewComponent } from './invoice-new/invoice-new.component';
 import { InvoicesComponent } from './page/invoices.component';

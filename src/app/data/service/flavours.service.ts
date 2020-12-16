@@ -37,8 +37,24 @@ export class FlavoursService {
       'name': data.name,
       'cost': data.cost,
       'stock': data.stock,
-      'unit': data.unit
+      'unit': data.unit,
+      'stockml': +(this.calcStockMl(data.stock, data.unit))
     })
+  }
+
+  calcStockMl(stock: number, unit) {
+    switch (unit) {
+      case 'Millilitre':
+        return +stock.toFixed(1);
+      case 'Litre':
+        return +(stock * 1000).toFixed(1);
+      case 'Ounce':
+        return +(stock * 29.5735).toFixed(1);
+      case '16 Ounce':
+        return +(stock * 473.176).toFixed(1);
+      case 'Gallon':
+        return +(stock * 3785.41).toFixed(1);
+    }
   }
 
   updateFlavour(id, data) {
@@ -52,8 +68,18 @@ export class FlavoursService {
 
   addFromCSV(data) {
     data.map(i => {
-      this.addFlavour(i);
+      
+      i.supplier = this.capitilise(i.supplier);
+      i.unit = this.capitilise(i.unit);
+      i.stock = +i.stock;
+      i.stockml = this.calcStockMl(+i.stock, this.capitilise(i.unit));
+      i.cost = +i.cost;      
+      this.afs.collection(`${this.user['uid']}/data/flavours`).add(i)
     })
+  }
+
+  capitilise(str) {
+    return str[0].toUpperCase() + str.slice(1);
   }
 
 }

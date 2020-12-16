@@ -20,14 +20,16 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit {
   invoiceNum: string;
   invoiceDetails: any = {};
   invoiceItems: any[] = [];
+  flavours: any[] = [];
 
-  flavourList: any = [];
+
+  flavourList: [] = [];
   filteredOptions: Observable<any[]>;
   addProduct = new FormControl();
 
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['product', 'unit', 'qty', 'cost', 'total'];
+  displayedColumns: string[] = ['product', 'unit', 'qty', 'cost', 'total', 'received'];
   unitOptions: string[] = ['Millilitre', 'Litre', 'Ounce', '16 Ounce', 'Gallon'];
 
 
@@ -49,11 +51,13 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit {
           'cost': data['cost'],
           'total': data['total'],
           'qty': data['qty'],
-          'unit': data['unit']
+          'unit': data['unit'],
+          'received': data['received']
         })
       });
-      this.dataSource.data = this.invoiceItems;      
-    })
+      this.dataSource.data = this.invoiceItems; 
+    });
+
   }
 
   ngAfterViewInit() {
@@ -64,25 +68,25 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit {
     return flavour && flavour.name ? flavour.name : ''; 
   }
 
-  private _filter(name: string): [] {
-    const filterValue = name.toLowerCase();
-    return this.flavourList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();    
+    return this.flavours.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   getFlavours(data) {
-    let flavours = new Array();
     this.flavourService.getFlavoursFromSupplier(data.supplier).snapshotChanges().subscribe(res => {
       res.map(i => {
-        flavours.push({
-          'name': i.payload.doc.data()['name'],
-          'id': i.payload.doc.id
+        this.flavours.push({
+          name: i.payload.doc.data()['name'],
+          id: i.payload.doc.id
         })
       });
+      
       this.filteredOptions = this.addProduct.valueChanges.pipe(
-            startWith(''),
-            map(value => typeof value === 'string' ? value: value.name),
-            map(name => name ? this._filter(name) : flavours.slice())
-          )
+        startWith(''),
+        map(value => typeof value === 'string' ? value: value.name),
+        map(name => name ? this._filter(name) : this.flavours.slice())
+      );    
     })
   }
 
@@ -94,7 +98,8 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit {
         'cost': res['cost'],
         'qty': 0,
         'total': '0',
-        'id': this.addProduct.value.id
+        'id': this.addProduct.value.id,
+        'received': 0
       }
       let data = this.dataSource.data;
       data.push(newProduct);
@@ -105,6 +110,24 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit {
   saveInvoiceButton() {
     this.invoiceService.updateInvoice(this.invoiceNum, this.dataSource.data);
     this.router.navigate(['admin/invoices'])
+  }
+
+  deleteHandler() {
+    if(confirm('Are you sure?')) {
+      this.invoiceService.deleteInvoice(this.invoiceNum);
+    }
+  }
+
+  markReceived() {
+    this.dataSource.data.map(i => {
+      i['received'] = i['qty']
+    })
+  }
+
+  receiveAndClose() {
+    this.invoiceService.receiveStock(this.dataSource.data);
+    this.invoiceService.closeInvoice(this.invoiceNum);
+    this.router.navigate(['admin/invoices']);
   }
 
 }
