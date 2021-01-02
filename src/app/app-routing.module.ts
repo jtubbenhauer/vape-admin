@@ -20,7 +20,7 @@ const routes: Routes = [
     {
       path: '',
       loadChildren: () => 
-        import('@modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+      import('@modules/mixing/mixing.module').then(m => m.MixingModule)
     },
     {
       path: 'suppliers',

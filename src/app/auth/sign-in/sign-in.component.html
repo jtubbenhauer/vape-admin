@@ -14,9 +14,10 @@
                     <input matInput type="password" [formControl]="passwordField" (keyup.enter)="submitHandler()">
                 </mat-form-field>
                 <div class="row">
-                    <a mat-raised-button color="primary" href="/register">Register</a>
                     <button mat-raised-button color="primary" (click)="submitHandler()">Sign In</button>
                 </div>
+                <span style="color: red;" *ngIf="errorMessage">{{errorMessage}}</span>
+                <a href="/register">Register New Account</a>
             </div>
         </mat-card>
     </div>

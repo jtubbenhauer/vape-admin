@@ -33,12 +33,14 @@ export class AuthService {
   };
 
   login(email:string, password: string) {
-    this.firebaseAuth.signInWithEmailAndPassword(email, password).then(value => {
-      localStorage.setItem('user', JSON.stringify(value.user))      
-      this.router.navigate(['admin'])
-    }).catch(err => {
-      console.log(err.message);
-    })
+    // this.firebaseAuth.signInWithEmailAndPassword(email, password).then(value => {
+    //   localStorage.setItem('user', JSON.stringify(value.user))      
+    //   this.router.navigate(['admin'])
+    // }).catch(err => {
+    //   console.log(err.message);
+    // })
+
+    return this.firebaseAuth.signInWithEmailAndPassword(email, password)
   }
 
   logout() {

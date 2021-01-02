@@ -9,10 +9,11 @@ import { DoublerComponent } from './page/doubler/doubler.component';
 import { BaseLiquidsWidgetComponent } from './page/base-liquids-widget/base-liquids-widget.component';
 import { QuickMixComponent } from './page/quick-mix/quick-mix.component';
 import { WeightsWidgetComponent } from './page/weights-widget/weights-widget.component';
+import { TestBatchComponent } from './page/test-batch/test-batch.component';
 
 
 @NgModule({
-  declarations: [MixingComponent, ConcentrateComponent, RtvComponent, DoublerComponent, BaseLiquidsWidgetComponent, QuickMixComponent, WeightsWidgetComponent],
+  declarations: [MixingComponent, ConcentrateComponent, RtvComponent, DoublerComponent, BaseLiquidsWidgetComponent, QuickMixComponent, WeightsWidgetComponent, TestBatchComponent],
   imports: [
     CommonModule,
     MixingRoutingModule,
