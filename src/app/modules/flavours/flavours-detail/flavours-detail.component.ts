@@ -60,8 +60,8 @@ export class FlavoursDetailComponent implements OnInit {
       this.flavourData.supplier = res['supplier'];
       this.flavourData.name = res['name'];
       this.flavourData.unit = res['unit'];
-      this.flavourData.stock = +parseFloat(res['stock']).toFixed(1);
-      this.flavourData.cost = +parseFloat(res['cost']).toFixed(1);
+      this.flavourData.stock = +parseFloat(res['stock']).toFixed(2);
+      this.flavourData.cost = +parseFloat(res['cost']).toFixed(2);
       res['notes'] ? this.flavourData.notes = res['notes'] : this.flavourData.notes = 'None';
       this.flavourForm.setValue(this.flavourData)
 

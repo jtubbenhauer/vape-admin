@@ -60,7 +60,7 @@ export class AddFlavourComponent implements OnInit {
   private _filter(name: string): Flavour[] {
     const filterValue = name.toLowerCase();
 
-    return this.flavourList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.flavourList.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   formSubmit() {

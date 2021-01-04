@@ -94,7 +94,7 @@ export class ConcentrateComponent implements OnInit {
             'supplier': i.supplier,
             'name': i.name,
             'percentage': i.percentage,
-            'quantity': +this.quantity.toFixed(1)
+            'quantity': +this.quantity.toFixed(2)
           });
         });
         
@@ -103,23 +103,23 @@ export class ConcentrateComponent implements OnInit {
             res.map(flavour => {
               switch(flavour['unit']) {
                 case 'Millilitre':
-                  recipe.on_hand = +flavour['stock'].toFixed(1);
+                  recipe.on_hand = +flavour['stock'].toFixed(2);
                   recipe.unit = flavour['unit'];
                   break;
                 case 'Litre':
-                  recipe.on_hand = +(flavour['stock'] * 1000).toFixed(1)
+                  recipe.on_hand = +(flavour['stock'] * 1000).toFixed(2)
                   recipe.unit = flavour['unit'];
                   break;
                 case 'Ounce':
-                  recipe.on_hand = +(flavour['stock'] * 29.574).toFixed(1)
+                  recipe.on_hand = +(flavour['stock'] * 29.574).toFixed(2)
                   recipe.unit = flavour['unit'];
                   break;
                 case '16 Ounce':
-                  recipe.on_hand = +(flavour['stock'] * 473.184).toFixed(1)
+                  recipe.on_hand = +(flavour['stock'] * 473.184).toFixed(2)
                   recipe.unit = flavour['unit'];
                   break;
                 case 'Gallon':
-                  recipe.on_hand = +(flavour['stock'] * 3785.4).toFixed(1)
+                  recipe.on_hand = +(flavour['stock'] * 3785.4).toFixed(2)
                   recipe.unit = flavour['unit'];
                   break;
               }

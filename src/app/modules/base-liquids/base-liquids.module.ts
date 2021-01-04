@@ -9,10 +9,12 @@ import { VgStockDialogComponent } from './dialogs/vg-stock-dialog/vg-stock-dialo
 import { PgStockDialogComponent } from './dialogs/pg-stock-dialog/pg-stock-dialog.component';
 import { VgCostDialogComponent } from './dialogs/vg-cost-dialog/vg-cost-dialog.component';
 import { PgCostDialogComponent } from './dialogs/pg-cost-dialog/pg-cost-dialog.component';
+import { VgTotalDialogComponent } from './dialogs/vg-total-dialog/vg-total-dialog.component';
+import { PgTotalDialogComponent } from './dialogs/pg-total-dialog/pg-total-dialog.component';
 
 
 @NgModule({
-  declarations: [BaseLiquidsComponent, VgStockDialogComponent, PgStockDialogComponent, VgCostDialogComponent, PgCostDialogComponent],
+  declarations: [BaseLiquidsComponent, VgStockDialogComponent, PgStockDialogComponent, VgCostDialogComponent, PgCostDialogComponent, VgTotalDialogComponent, PgTotalDialogComponent],
   imports: [
     CommonModule,
     BaseLiquidsRoutingModule,
