@@ -45,15 +45,15 @@ export class FlavoursService {
   calcStockMl(stock: number, unit) {
     switch (unit) {
       case 'Millilitre':
-        return +stock.toFixed(1);
+        return +stock;
       case 'Litre':
-        return +(stock * 1000).toFixed(1);
+        return +(stock * 1000).toFixed(2);
       case 'Ounce':
-        return +(stock * 29.5735).toFixed(1);
+        return +(stock * 29.5735).toFixed(2);
       case '16 Ounce':
-        return +(stock * 473.176).toFixed(1);
+        return +(stock * 473.176).toFixed(2);
       case 'Gallon':
-        return +(stock * 3785.41).toFixed(1);
+        return +(stock * 3785.41).toFixed(2);
     }
   }
 

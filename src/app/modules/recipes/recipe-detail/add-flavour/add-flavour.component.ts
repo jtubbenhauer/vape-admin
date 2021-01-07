@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { RecipesService } from 'app/data/service/recipes.service';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 export interface Flavour {
   name: string;

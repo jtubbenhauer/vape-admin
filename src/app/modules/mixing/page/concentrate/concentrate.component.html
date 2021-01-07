@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="flex-container form">
     <mat-card>
-        <mat-form-field>
+        <mat-form-field style="flex-basis: 33%">
           <mat-label>Recipe</mat-label>
           <input type="text" matInput [formControl]="recipe" [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">

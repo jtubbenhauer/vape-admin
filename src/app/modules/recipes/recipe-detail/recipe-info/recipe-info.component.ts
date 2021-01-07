@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RecipesService } from 'app/data/service/recipes.service';
 
@@ -7,7 +7,7 @@ import { RecipesService } from 'app/data/service/recipes.service';
   templateUrl: './recipe-info.component.html',
   styleUrls: ['./recipe-info.component.css']
 })
-export class RecipeInfoComponent implements OnInit, OnChanges {
+export class RecipeInfoComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor(private service: RecipesService) { }
 
@@ -22,9 +22,15 @@ export class RecipeInfoComponent implements OnInit, OnChanges {
   newCollection = new FormControl();
 
   ngOnInit(): void {
+    
   }
 
   ngOnChanges() {
+
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.title);
 
   }
 

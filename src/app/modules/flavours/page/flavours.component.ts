@@ -46,6 +46,8 @@ export class FlavoursComponent implements OnInit {
     });
 
     addFlavourDialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      
       this.service.addFlavour(res);
     })
   }

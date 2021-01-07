@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { RecipesService } from 'app/data/service/recipes.service';
 import { Router } from "@angular/router";
-import { RecipeInfoComponent } from './recipe-info/recipe-info.component';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -36,7 +35,7 @@ export class RecipeDetailComponent implements OnInit {
     }
   }
 
-  saveButton() {
+  saveButton() {    
     this.service.saveRecipe(this.id);
   }
 

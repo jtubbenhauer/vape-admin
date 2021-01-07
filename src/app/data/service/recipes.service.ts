@@ -48,6 +48,9 @@ export class RecipesService {
     if (!collection) {
       collection = '';
     }
+    this.newName = name;
+    this.newCollection = collection;
+    this.newConcentrate = concentrate;
     this.afs.collection(this.uid).doc('data').collection('recipes').add({
       'name': name,
       'collection': collection,
@@ -62,7 +65,7 @@ export class RecipesService {
     return this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).delete();
   }
 
-  saveRecipe(id) {
+  saveRecipe(id) {    
     if (this.changed) {
       this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).update({
         'name': this.newName,

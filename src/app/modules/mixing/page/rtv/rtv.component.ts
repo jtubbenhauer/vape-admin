@@ -72,7 +72,7 @@ export class RtvComponent implements OnInit {
   private _filter(name: string): Recipe[] {
     const filterValue = name.toLowerCase();
 
-    return this.recipeList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.recipeList.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
 
@@ -119,21 +119,25 @@ export class RtvComponent implements OnInit {
     if(tableData[0].concentrate) {
 
     }
+
+    if (confirm('Commit batch?')) {
+      this.service.getVGStock().subscribe(res => {
+        let totalVG = +res['stock'] - +commitVG;
+        if (vgCount === 0) {
+          this.service.updateBaseStock('vg', +totalVG.toFixed(1));
+          vgCount++;
+        }
+      });
+      this.service.getPGStock().subscribe(res => {
+        let totalPG = +res['stock'] - +commitPG;
+        if (pgCount === 0) {
+          this.service.updateBaseStock('pg', +totalPG.toFixed(1));
+          pgCount++;
+        }
+      });
+    }
     
-    this.service.getVGStock().subscribe(res => {
-      let totalVG = +res['stock'] - +commitVG;
-      if (vgCount === 0) {
-        this.service.updateBaseStock('vg', +totalVG.toFixed(1));
-        vgCount++;
-      }
-    });
-    this.service.getPGStock().subscribe(res => {
-      let totalPG = +res['stock'] - +commitPG;
-      if (pgCount === 0) {
-        this.service.updateBaseStock('pg', +totalPG.toFixed(1));
-        pgCount++;
-      }
-    });
+    
   }
 
 }

@@ -69,7 +69,7 @@ export class DoublerComponent implements OnInit {
   
   private _filter(name: string): Recipe[] {
     const filterValue = name.toLowerCase();
-    return this.recipeList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.recipeList.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   calculateButton() {

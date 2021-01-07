@@ -72,7 +72,7 @@ export class InvoiceNewComponent implements OnInit, AfterViewInit {
 
   private _filter(name: string): any[] {
     const filterValue = name.toLowerCase();
-    return this.flavours.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.flavours.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   displayFn(flavour): string {

@@ -72,7 +72,7 @@ export class ConcentrateComponent implements OnInit {
   
   private _filter(name: string): Recipe[] {
     const filterValue = name.toLowerCase();
-    return this.recipeList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.recipeList.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   clickHandler() {
@@ -132,7 +132,7 @@ export class ConcentrateComponent implements OnInit {
   };
 
   commitBatch() {
-    if (confirm('Are you sure?')) {
+    if (confirm('Commit batch?')) {
       if(this.dataSource.data.length === 0) {
         window.alert('Please choose a recipe')
       } else {
@@ -153,6 +153,8 @@ export class ConcentrateComponent implements OnInit {
         });
         let count = 0;
         let newConc: number = 0;
+        console.log(this.recipe.value.name, totalConc);
+        
         this.service.getRecipeByID(this.recipeID).subscribe(res => {
           if (count === 0) {
             newConc = +res['concentrate'] + totalConc;
