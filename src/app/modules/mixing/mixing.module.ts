@@ -10,10 +10,11 @@ import { BaseLiquidsWidgetComponent } from './page/base-liquids-widget/base-liqu
 import { QuickMixComponent } from './page/quick-mix/quick-mix.component';
 import { WeightsWidgetComponent } from './page/weights-widget/weights-widget.component';
 import { TestBatchComponent } from './page/test-batch/test-batch.component';
+import { CalculatorDialogComponent } from './page/base-liquids-widget/calculator-dialog/calculator-dialog.component';
 
 
 @NgModule({
-  declarations: [MixingComponent, ConcentrateComponent, RtvComponent, DoublerComponent, BaseLiquidsWidgetComponent, QuickMixComponent, WeightsWidgetComponent, TestBatchComponent],
+  declarations: [MixingComponent, ConcentrateComponent, RtvComponent, DoublerComponent, BaseLiquidsWidgetComponent, QuickMixComponent, WeightsWidgetComponent, TestBatchComponent, CalculatorDialogComponent],
   imports: [
     CommonModule,
     MixingRoutingModule,
