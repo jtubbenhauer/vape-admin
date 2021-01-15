@@ -11,3 +11,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.mat-form-field {
+  width: 75px;
+}

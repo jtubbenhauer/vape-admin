@@ -100,20 +100,24 @@ export class DoublerComponent implements OnInit {
     let vgCount = 0;
     let pgCount = 0;
 
-    this.service.getVGStock().subscribe(res => {
-      let totalVG = res['stock'] - commitVG;
-      if (vgCount === 0) {
-        this.service.updateBaseStock('vg', +totalVG.toFixed(1));
-        vgCount++;
-      }
-    });
-    this.service.getPGStock().subscribe(res => {
-      let totalPG = res['stock'] - commitPG;
-      if (pgCount === 0) {
-        this.service.updateBaseStock('pg', +totalPG.toFixed(1));
-        pgCount++;
-      }
-    });
+    if (confirm('Commit batch?')) {
+      this.service.getVGStock().subscribe(res => {
+        let totalVG = res['stock'] - commitVG;
+        if (vgCount === 0) {
+          this.service.updateBaseStock('vg', +totalVG.toFixed(1));
+          vgCount++;
+        }
+      });
+      this.service.getPGStock().subscribe(res => {
+        let totalPG = res['stock'] - commitPG;
+        if (pgCount === 0) {
+          this.service.updateBaseStock('pg', +totalPG.toFixed(1));
+          pgCount++;
+        }
+      });
+    }
+
+    
   }
 
 }
