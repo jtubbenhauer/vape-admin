@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MixingService } from 'app/data/service/mixing.service';
 
 @Component({
   selector: 'app-batch-history',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BatchHistoryComponent implements OnInit {
 
-  constructor() { }
+  batchHistory: any[];
+
+  constructor(private service: MixingService) { }
 
   ngOnInit(): void {
+    this.service.getBatchHistory().subscribe(res => {
+      this.batchHistory = res;          
+    })
   }
 
 }

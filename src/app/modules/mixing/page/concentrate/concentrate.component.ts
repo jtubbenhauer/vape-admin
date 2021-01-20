@@ -133,6 +133,8 @@ export class ConcentrateComponent implements OnInit {
 
   commitBatch() {
     if (confirm('Commit batch?')) {
+      this.service.addBatchHistory(this.recipe.value['name'], 'Conc')
+
       if(this.dataSource.data.length === 0) {
         window.alert('Please choose a recipe')
       } else {
@@ -153,8 +155,9 @@ export class ConcentrateComponent implements OnInit {
         });
         let count = 0;
         let newConc: number = 0;
-        console.log(this.recipe.value.name, totalConc);
+
         
+
         this.service.getRecipeByID(this.recipeID).subscribe(res => {
           if (count === 0) {
             newConc = +res['concentrate'] + totalConc;

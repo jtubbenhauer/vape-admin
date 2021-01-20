@@ -9,7 +9,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    width: 300px;
 }
 
 .mat-form-field {

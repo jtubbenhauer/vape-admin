@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import firestore from "firebase/app";
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,9 @@ export class MixingService {
 
   user = JSON.parse(localStorage.getItem('user'));
   uid = this.user.uid;
+  batchHistory = JSON.parse(localStorage.getItem('batches'));
+
+  batchHistoryObserver = new BehaviorSubject(this.batchHistory);
 
   constructor(private afs: AngularFirestore) { }
 
@@ -100,6 +103,29 @@ export class MixingService {
 
   updateConcentrate(id, num) {
     this.afs.collection(this.uid).doc('data').collection('recipes').doc(id).update({'concentrate': num})
+  }
+
+  addBatchHistory(recipe: string, type: string) {
+
+    if (localStorage.getItem('batches')) {
+      this.batchHistory = JSON.parse(localStorage.getItem('batches'));
+    } else {
+      this.batchHistory = [];
+    }
+
+    if (this.batchHistory.length < 5) {
+      this.batchHistory.unshift(`${type} - ${recipe}`);
+    } else {
+      this.batchHistory.pop();
+      this.batchHistory.unshift(`${type} - ${recipe}`);
+    }
+    
+    localStorage.setItem('batches', JSON.stringify(this.batchHistory));
+    this.batchHistoryObserver.next(this.batchHistory)
+  }
+
+  getBatchHistory() {
+    return this.batchHistoryObserver;
   }
 }
 

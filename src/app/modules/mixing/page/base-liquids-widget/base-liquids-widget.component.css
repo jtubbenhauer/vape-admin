@@ -1,5 +1,5 @@
-mat-list-item {
-  border-top: 1px solid rgb(212, 212, 212)
+.mat-list .mat-list-item {
+  height: 50px; /* default is 72px */
 }
 
 .container {
@@ -7,3 +7,4 @@ mat-list-item {
   flex-direction: column;
   align-items: flex-start;
 }
+

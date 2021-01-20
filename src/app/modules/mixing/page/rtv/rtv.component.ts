@@ -121,6 +121,8 @@ export class RtvComponent implements OnInit {
     }
 
     if (confirm('Commit batch?')) {
+      this.service.addBatchHistory(this.recipe.value['name'], 'RTV')
+
       this.service.getVGStock().subscribe(res => {
         let totalVG = +res['stock'] - +commitVG;
         if (vgCount === 0) {

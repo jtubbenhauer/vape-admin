@@ -101,6 +101,8 @@ export class DoublerComponent implements OnInit {
     let pgCount = 0;
 
     if (confirm('Commit batch?')) {
+      this.service.addBatchHistory(this.recipe.value['name'], 'Doubler')
+
       this.service.getVGStock().subscribe(res => {
         let totalVG = res['stock'] - commitVG;
         if (vgCount === 0) {

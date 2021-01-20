@@ -113,6 +113,8 @@ export class QuickMixComponent implements OnInit {
     let pgCount = 0;
 
     if (confirm('Commit batch?')) {
+      this.service.addBatchHistory(this.recipe.value['name'], 'Quick-Mix')
+
       this.service.getVGStock().subscribe(res => {
         let totalVG = +res['stock'] - +commitVG;
         if (vgCount === 0) {

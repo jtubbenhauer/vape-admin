@@ -2,14 +2,21 @@
     <div class="row-container">
         <mat-form-field>
             <mat-label>VG (ml)</mat-label>
-            <input matInput placeholder="0">
+            <input matInput [(ngModel)]="vgInput" (keyup)="calc()">
         </mat-form-field>
-        <span> = Result</span>
+        <span>=</span>
+        <span>{{vgResult}} g</span>
     </div>
     
-    <mat-form-field>
+    <div class="row-container">
+      <mat-form-field>
         <mat-label>PG (ml)</mat-label>
-        <input matInput placeholder="0">
-    </mat-form-field>
-    <button mat-raised-button color="primary">Calculate</button>
+        <input matInput [(ngModel)]="pgInput" (keyup)="calc()">
+      </mat-form-field>
+      <span>=</span>
+      <span>{{pgResult}} g</span>
+    </div>
+
+    <button mat-raised-button color="primary">Commit</button>
+
 </div>
