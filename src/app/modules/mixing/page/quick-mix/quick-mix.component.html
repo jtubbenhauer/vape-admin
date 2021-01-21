@@ -5,7 +5,7 @@
         <mat-form-field class="recipe">
           <mat-label>Recipe</mat-label>
           <input [formControl]="recipe" matInput [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="calculateButton()">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option.name}}
             </mat-option>
@@ -13,23 +13,23 @@
         </mat-form-field>
         <mat-form-field class="finalsize">
           <mat-label>Final Size</mat-label>
-          <input matInput [formControl]="size">
+          <input matInput [formControl]="size" (keyup)="calculateButton()">
         </mat-form-field>
         <mat-form-field class="nicvg">
           <mat-label>Nic VG%</mat-label>
-          <input matInput [formControl]="nicvg">
+          <input matInput [formControl]="nicvg" (keyup)="calculateButton()">
         </mat-form-field>
         <mat-form-field class="nicstrength">
           <mat-label>Nic Strength</mat-label>
-          <input matInput [formControl]="nicstrength">
+          <input matInput [formControl]="nicstrength" (keyup)="calculateButton()">
         </mat-form-field>
         <mat-form-field class="targetvg">
           <mat-label>Target VG%</mat-label>
-          <input matInput [formControl]="targetvg">
+          <input matInput [formControl]="targetvg" (keyup)="calculateButton()">
         </mat-form-field>
         <mat-form-field class="targetnic">
           <mat-label>Target Nic</mat-label>
-          <input matInput [formControl]="targetnic">
+          <input matInput [formControl]="targetnic" (keyup)="calculateButton()">
         </mat-form-field>
         <div class="calcbutton">
           <button mat-raised-button color="primary" (click)="calculateButton()">Calculate</button>

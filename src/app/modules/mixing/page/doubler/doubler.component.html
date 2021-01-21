@@ -4,7 +4,7 @@
         <mat-form-field style="flex-basis: 40%">
           <mat-label>Recipe</mat-label>
           <input [formControl]="recipe" matInput [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="calculateButton()">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option.name}}
             </mat-option>
@@ -12,11 +12,11 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Batch Size</mat-label>
-          <input matInput [formControl]="size">
+          <input matInput [formControl]="size" autocomplete="off" (keyup)="calculateButton()">
         </mat-form-field>
         <mat-form-field>
           <mat-label>VG Percentage</mat-label>
-          <input matInput [formControl]="vgPercentage">
+          <input matInput [formControl]="vgPercentage" autocomplete="off" (keyup)="calculateButton()">
         </mat-form-field>
         <div class="alert" *ngIf="vgPercentage.errors">Must be between 40 - 65%</div>
   
