@@ -142,9 +142,10 @@ export class InvoiceService {
   }
 
   receivedToMl(unit, received) {
+    
     switch (unit) {
       case 'Millilitre':
-        return +received.toFixed(1);
+        return +received;
       case 'Litre':
         return +(received * 1000).toFixed(1);
       case 'Ounce':

@@ -167,7 +167,7 @@ export class ConcentrateComponent implements OnInit {
         });
         
       }
-    }
+    };
   }
 
 
