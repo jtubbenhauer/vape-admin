@@ -2,14 +2,55 @@
     <mat-card>
         <mat-form-field>
             <mat-label>Supplier</mat-label>
-            <mat-select [formControl]='supplier' (selectionChange)="supplierChange($event.value)">
+            <mat-select [formControl]='supplier'>
                 <mat-option *ngFor="let item of supplierOptions" [value]="item">
                     {{item}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <table>
-            
+        <button mat-raised-button color="primary" (click)="newStocktakeButton()">New Stocktake</button>
+    </mat-card>
+    <mat-card>
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Flavour </th>
+                <td mat-cell *matCellDef="let flavour">{{flavour['name']}}</td>
+            </ng-container>
+            <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit </th>
+                <td mat-cell *matCellDef="let flavour">{{flavour['unit']}}</td>
+            </ng-container>
+            <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty </th>
+                <td mat-cell *matCellDef="let flavour">{{flavour['stock']}}</td>
+            </ng-container>
+            <ng-container matColumnDef="newUnit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> New Unit </th>
+                <td mat-cell *matCellDef="let flavour">
+                    <mat-form-field class="form-select">
+                        <mat-select [(value)]="flavour['unit']">
+                            <mat-option *ngFor="let option of unitOptions" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="newQty">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> New Qty </th>
+                <td mat-cell *matCellDef="let flavour">
+                    <mat-form-field class="stock-input">
+                        <input matInput autocomplete="off">
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="save">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                <td mat-cell *matCellDef="let flavour"><button mat-raised-button color="primary">Save</button></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </mat-card>
 </div>

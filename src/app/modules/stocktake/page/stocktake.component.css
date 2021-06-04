@@ -7,5 +7,13 @@
 
 .mat-card {
     margin-top: 20px;
-    width: 900px;
+    width: 1200px;
+}
+
+.stock-input {
+    width: 75px;
+}
+
+.form-select {
+    width: 100px;
 }
