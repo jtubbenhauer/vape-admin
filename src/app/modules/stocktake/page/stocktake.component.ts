@@ -17,6 +17,9 @@ export class StocktakeComponent implements OnInit, AfterViewInit {
   flavours: any[] = [];
   filteredOptions: Observable<any[]>;
 
+  newQty: number;
+  index: number;
+
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'unit', 'qty', 'newUnit', 'newQty', 'save'];
@@ -31,8 +34,7 @@ export class StocktakeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
+
     this.dataSource.sort = this.sort;
   }
 
@@ -44,21 +46,42 @@ export class StocktakeComponent implements OnInit, AfterViewInit {
     })
   }
 
-  newStocktakeButton() {
+  saveClick(flavour) {
+        
+    let id = flavour['id'];
+    let data = {
+      'stock': +flavour['newQty'],
+      'unit': flavour['newUnit']
+    }    
+    
+    this.flavourService.updateFlavour(id, data);
+    
+    this.index = this.flavours.findIndex(i => i.id === flavour['id']);
+
+    
+  }
+
+  newStocktakeButton() {    
     let supplier = this.supplier.value;
-    this.flavours = [];
+    
     this.flavourService.getFlavoursFromSupplier(supplier).snapshotChanges().subscribe(res => {
       res.map(i => {
-        console.log(i.payload.doc.data())
         this.flavours.push({
           'name': i.payload.doc.data()['name'],
           'id': i.payload.doc.id,
           'stock': i.payload.doc.data()['stock'],
-          'unit':i.payload.doc.data()['unit']
+          'unit':i.payload.doc.data()['unit'],
+          'newUnit':i.payload.doc.data()['unit'],
+          'newQty':0
         });
+    
       });
       this.dataSource.data = this.flavours;
-    })
+      this.flavours = [];
+      });
+    
+    
+
   }
 
   /*supplierChange(value) {

@@ -28,7 +28,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> New Unit </th>
                 <td mat-cell *matCellDef="let flavour">
                     <mat-form-field class="form-select">
-                        <mat-select [(value)]="flavour['unit']">
+                        <mat-select [(value)]="flavour['newUnit']">
                             <mat-option *ngFor="let option of unitOptions" [value]="option">
                                 {{option}}
                             </mat-option>
@@ -40,13 +40,13 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> New Qty </th>
                 <td mat-cell *matCellDef="let flavour">
                     <mat-form-field class="stock-input">
-                        <input matInput autocomplete="off">
+                        <input matInput autocomplete="off" [(ngModel)]="flavour['newQty']">
                     </mat-form-field>
                 </td>
             </ng-container>
             <ng-container matColumnDef="save">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                <td mat-cell *matCellDef="let flavour"><button mat-raised-button color="primary">Save</button></td>
+                <td mat-cell *matCellDef="let flavour"><button mat-raised-button color="primary" (click)="saveClick(flavour)">Save</button></td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
