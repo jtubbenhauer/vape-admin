@@ -20,6 +20,8 @@ export class StocktakeComponent implements OnInit, AfterViewInit {
   newQty: number;
   index: number;
 
+  count:number = 0;
+
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'unit', 'qty', 'newUnit', 'newQty', 'save'];
@@ -47,55 +49,49 @@ export class StocktakeComponent implements OnInit, AfterViewInit {
   }
 
   saveClick(flavour) {
-        
+    
     let id = flavour['id'];
     let data = {
       'stock': +flavour['newQty'],
       'unit': flavour['newUnit']
-    }    
+    } 
+    
+    let delId = this.dataSource.data.findIndex(i => i['id'] == id)
     
     this.flavourService.updateFlavour(id, data);
-    
-    this.index = this.flavours.findIndex(i => i.id === flavour['id']);
+    this.flavours.splice(delId, 1);
+    this.dataSource.data = this.flavours
 
-    
+ 
   }
 
   newStocktakeButton() {    
+    this.count = 0;
+    this.flavours = [];
     let supplier = this.supplier.value;
-    
+
     this.flavourService.getFlavoursFromSupplier(supplier).snapshotChanges().subscribe(res => {
-      res.map(i => {
-        this.flavours.push({
-          'name': i.payload.doc.data()['name'],
-          'id': i.payload.doc.id,
-          'stock': i.payload.doc.data()['stock'],
-          'unit':i.payload.doc.data()['unit'],
-          'newUnit':i.payload.doc.data()['unit'],
-          'newQty':0
-        });
-    
-      });
-      this.dataSource.data = this.flavours;
-      this.flavours = [];
-      });
+      if (this.count === 0) {
+        res.map(i => {
+          this.flavours.push({
+            'name': i.payload.doc.data()['name'],
+            'id': i.payload.doc.id,
+            'stock': i.payload.doc.data()['stock'],
+            'unit':i.payload.doc.data()['unit'],
+            'newUnit':i.payload.doc.data()['unit'],
+            'newQty':0
+          });
+          
+        })
+        this.dataSource.data = this.flavours;
+        this.count++;
+      }
+    });
+    };
     
     
 
   }
 
-  /*supplierChange(value) {
-    this.flavours = [];
-    this.flavourService.getFlavoursFromSupplier(value).snapshotChanges().subscribe(res => {
-      res.map(i => {
-        console.log(i.payload.doc.data())
-        this.flavours.push({
-          'name': i.payload.doc.data()['name'],
-          'id': i.payload.doc.id
-        });
-      });
-      this.dataSource.data = this.flavours;
-    })
-  } */
 
-}
+
