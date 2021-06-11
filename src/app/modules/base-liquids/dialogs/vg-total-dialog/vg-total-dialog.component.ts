@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Component, OnInit, Inject } from '@angular/core';
+import {  MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+
+export interface DialogData {
+  base: string;
+  stock: number;
+}
 
 
 @Component({
@@ -9,7 +14,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class VgTotalDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<VgTotalDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit(): void {
   }

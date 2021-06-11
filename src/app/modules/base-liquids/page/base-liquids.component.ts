@@ -5,6 +5,8 @@ import { PgStockDialogComponent } from "../dialogs/pg-stock-dialog/pg-stock-dial
 import { BaseLiquidsService } from "app/data/service/base-liquids.service";
 import { VgCostDialogComponent } from '../dialogs/vg-cost-dialog/vg-cost-dialog.component';
 import { PgCostDialogComponent } from '../dialogs/pg-cost-dialog/pg-cost-dialog.component';
+import { PgTotalDialogComponent } from '../dialogs/pg-total-dialog/pg-total-dialog.component';
+import { VgTotalDialogComponent } from '../dialogs/vg-total-dialog/vg-total-dialog.component';
 
 @Component({
   selector: 'app-base-liquids',
@@ -72,6 +74,27 @@ export class BaseLiquidsComponent implements OnInit, AfterViewInit {
       this.service.updateCost(res.base, res.cost)
     })
   };
+
+  openPgTotalDialog(): void {
+    const pgTotalDialogRef = this.dialog.open(PgTotalDialogComponent,
+    {
+      width: '250px',
+      data: {
+        'base': 'vg',
+        'stock': 'stock'
+      }
+
+      //update stock via service
+    }
+      )}
+
+  openVgTotalDialog(): void {
+    const vgTotalDialogRef = this.dialog.open(VgTotalDialogComponent,
+    {
+      width: '250px'
+    }
+      )
+  }
 
 
 

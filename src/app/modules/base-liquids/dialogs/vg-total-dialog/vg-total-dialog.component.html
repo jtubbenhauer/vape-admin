@@ -1,1 +1,11 @@
-<p>vg-total-dialog works!</p>
+<h1>Update Total VG</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Total VG Stock (Litres)</mat-label>
+        <input matInput [(ngModel)]="data.stock">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>
